@@ -1,0 +1,181 @@
+{
+  "stage": "passed",
+  "checks": [
+    "bash syntax: build and prepare",
+    "package verifies all 14 source images, board, ZIP CRC and SHA256; refuses overwrite",
+    "package rejects wrong board",
+    "package rejects missing partition"
+  ],
+  "source_delta_replay": {
+    "projects": 41,
+    "text_changes": 395,
+    "omitted_binary_inputs": 0,
+    "checks": [
+      {
+        "path": "build/blueprint",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "build/make",
+        "exact_text_changes_verified": 3
+      },
+      {
+        "path": "build/soong",
+        "exact_text_changes_verified": 4
+      },
+      {
+        "path": "device/qcom/common",
+        "exact_text_changes_verified": 17
+      },
+      {
+        "path": "device/qcom/sepolicy",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "device/xiaomi/sepolicy",
+        "exact_text_changes_verified": 5
+      },
+      {
+        "path": "external/tinyalsa",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "external/wpa_supplicant_8",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "frameworks/av",
+        "exact_text_changes_verified": 8
+      },
+      {
+        "path": "frameworks/base",
+        "exact_text_changes_verified": 180
+      },
+      {
+        "path": "frameworks/native",
+        "exact_text_changes_verified": 4
+      },
+      {
+        "path": "frameworks/opt/telephony",
+        "exact_text_changes_verified": 4
+      },
+      {
+        "path": "hardware/interfaces",
+        "exact_text_changes_verified": 5
+      },
+      {
+        "path": "hardware/qcom/display",
+        "exact_text_changes_verified": 6
+      },
+      {
+        "path": "hardware/qcom/gps",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "hardware/xiaomi",
+        "exact_text_changes_verified": 12
+      },
+      {
+        "path": "packages/apps/Launcher3",
+        "exact_text_changes_verified": 5
+      },
+      {
+        "path": "packages/apps/ParanoidSettings",
+        "exact_text_changes_verified": 5
+      },
+      {
+        "path": "packages/apps/Settings",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "packages/modules/Bluetooth",
+        "exact_text_changes_verified": 13
+      },
+      {
+        "path": "packages/modules/Connectivity",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "packages/modules/ModuleMetadata",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "packages/modules/Wifi",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "system/core",
+        "exact_text_changes_verified": 6
+      },
+      {
+        "path": "system/libbase",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "system/logging",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "system/media",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "system/memory/libdmabufheap",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "system/memory/libmeminfo",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "system/netd",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "system/sepolicy",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "vendor/aospa",
+        "exact_text_changes_verified": 68
+      },
+      {
+        "path": "vendor/qcom/common",
+        "exact_text_changes_verified": 6
+      },
+      {
+        "path": "vendor/qcom/opensource/audio-hal/primary-hal",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "vendor/qcom/opensource/core-utils",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "vendor/qcom/opensource/thermal-hal",
+        "exact_text_changes_verified": 5
+      },
+      {
+        "path": "vendor/qcom/opensource/usb",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "kernel_platform/msm-kernel",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "vendor/google/gms",
+        "exact_text_changes_verified": 2
+      },
+      {
+        "path": "vendor/google/pixel",
+        "exact_text_changes_verified": 1
+      },
+      {
+        "path": "packages/services/Telecomm",
+        "exact_text_changes_verified": 4
+      }
+    ],
+    "source_checkouts_modified": false
+  }
+}

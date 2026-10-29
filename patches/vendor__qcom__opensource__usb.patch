@@ -1,0 +1,43 @@
+diff --git a/hal/Usb.cpp b/hal/Usb.cpp
+index c17a6264ab5fcb97a21df47507a661cb185bbce2..833e8150d6821abe47c81a5e4217ec674969d517 100644
+--- a/hal/Usb.cpp
++++ b/hal/Usb.cpp
+@@ -218,14 +218,28 @@ static void extractRole(std::string &roleName) {
+   }
+ }
+ 
++static bool canSwitchModeHelper(const std::string &portName) {
++  // The Type-C core only exposes a writable port_type when the driver
++  // implements port_type_set and the port supports changing its type.
++  const std::string filename =
++      appendRoleNodeHelper(portName, PortRole::mode);
++  return access(filename.c_str(), W_OK) == 0;
++}
++
+ static void switchToDrp(const std::string &portName) {
++  if (!canSwitchModeHelper(portName)) return;
+   std::string filename = appendRoleNodeHelper(portName, PortRole::mode);
+ 
+   if (!WriteStringToFile("dual", filename))
+-    ALOGE("Fatal: Error while switching back to drp");
++    PLOG(ERROR) << "Unable to restore DRP on " << filename;
+ }
+ 
+ bool Usb::switchMode(const std::string &portName, const PortRole &newRole) {
++  if (!canSwitchModeHelper(portName)) {
++    ALOGE("Port %s does not support changing its type", portName.c_str());
++    return false;
++  }
++
+   std::string filename = appendRoleNodeHelper(portName, newRole.getTag());
+   bool roleSwitch = false;
+ 
+@@ -556,7 +570,7 @@ Status Usb::getPortStatusHelper(std::vector<PortStatus> &currentPortStatus,
+         goto done;
+       }
+ 
+-      status.canChangeMode = true;
++      status.canChangeMode = canSwitchModeHelper(portName);
+       status.canChangeDataRole =
+           connected ? canSwitchRoleHelper(portName) : false;
+       status.canChangePowerRole =

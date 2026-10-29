@@ -1,0 +1,30 @@
+[
+  {
+    "project": "vendor/qcom/common",
+    "input": "system/telephony/proprietary/system_ext/priv-app/QtiTelephony/QtiTelephony.apk"
+  },
+  {
+    "project": "vendor/qcom/common",
+    "input": "system/telephony/proprietary/system_ext/priv-app/ims/ims.apk"
+  },
+  {
+    "project": "vendor/qcom/common",
+    "input": "system/wfd/proprietary/system_ext/priv-app/WfdService/WfdService.apk"
+  },
+  {
+    "project": "vendor/qcom/common",
+    "input": "vendor/perf/proprietary/vendor/bin/vendor.qti.qspmhal-service"
+  },
+  {
+    "project": "vendor/qcom/common",
+    "input": "vendor/perf/proprietary/vendor/lib64/libqspm-mem-utils-vendor.so"
+  },
+  {
+    "project": "vendor/qcom/common",
+    "input": "vendor/perf/proprietary/vendor/lib64/vendor.qti.qspmhal-V1-ndk.so"
+  },
+  {
+    "project": "vendor/qcom/common",
+    "input": "vendor/perf/proprietary/vendor/lib64/vendor.qti.qspmhal-impl.so"
+  }
+]

@@ -1,0 +1,601 @@
+diff --git a/src/com/android/server/telecom/AsyncRingtonePlayer.java b/src/com/android/server/telecom/AsyncRingtonePlayer.java
+index bb49ac9655e069aaeeab8dee8bb63431a1ba08f3..26d848daa2f56c9f878bfecaf3a2ebbef3afeb69 100644
+--- a/src/com/android/server/telecom/AsyncRingtonePlayer.java
++++ b/src/com/android/server/telecom/AsyncRingtonePlayer.java
+@@ -34,11 +34,8 @@ import com.android.internal.os.SomeArgs;
+ import com.android.internal.util.Preconditions;
+ import com.android.server.telecom.flags.FeatureFlags;
+ 
+-import java.util.ArrayList;
+-import java.util.concurrent.CountDownLatch;
+ import java.util.concurrent.ExecutorService;
+ import java.util.concurrent.Executors;
+-import java.util.concurrent.TimeUnit;
+ import java.util.function.BiConsumer;
+ import java.util.function.Supplier;
+ 
+@@ -48,9 +45,6 @@ import java.util.function.Supplier;
+  */
+ @VisibleForTesting
+ public class AsyncRingtonePlayer {
+-    // Maximum amount of time we will delay playing a ringtone while waiting for audio routing to
+-    // be ready.
+-    private static final int PLAY_DELAY_TIMEOUT_MS = 1000;
+     // Message codes used with the ringtone thread.
+     private static final int EVENT_PLAY = 1;
+     private static final int EVENT_STOP = 2;
+@@ -75,17 +69,6 @@ public class AsyncRingtonePlayer {
+      */
+     private volatile boolean mIsPlaying = false;
+ 
+-    /**
+-     * Set to true if BT HFP is active and audio is connected.
+-     */
+-    private boolean mIsBtActive = false;
+-
+-    /**
+-     * A list of pending ringing ready latches, which are used to delay the ringing command until
+-     * audio paths are set and ringing is ready.
+-     */
+-    private final ArrayList<CountDownLatch> mPendingRingingLatches = new ArrayList<>();
+-
+     private final FeatureFlags mFeatureFlags;
+ 
+     public AsyncRingtonePlayer(FeatureFlags featureFlags) {
+@@ -105,13 +88,16 @@ public class AsyncRingtonePlayer {
+     public void play(@NonNull Supplier<Pair<Uri, Ringtone>> ringtoneInfoSupplier,
+             BiConsumer<Pair<Uri, Ringtone>, Boolean> ringtoneConsumer,
+             boolean isHfpDeviceConnected) {
+-        Log.d(this, "Posting play.");
++        // Start playback independently of asynchronous SCO setup. Audio policy reroutes
++        // active playback when the communication device changes; cached Bluetooth
++        // readiness must not decide when a new call starts its ringtone.
++        Log.i(this, "Posting play without SCO readiness gate; HFP connected=%b",
++                isHfpDeviceConnected);
+         mIsPlaying = true;
+         SomeArgs args = SomeArgs.obtain();
+         args.arg1 = ringtoneInfoSupplier;
+         args.arg2 = ringtoneConsumer;
+         args.arg3 = Log.createSubsession();
+-        args.arg4 = prepareRingingReadyLatch(isHfpDeviceConnected);
+ 
+         postTask(() -> handlePlayExecutor(args));
+     }
+@@ -121,65 +107,6 @@ public class AsyncRingtonePlayer {
+         Log.d(this, "Posting stop.");
+         mIsPlaying = false;
+         postTask(this::handleStopExecutor);
+-        // Clear any pending ringing latches so that we do not have to wait for its timeout to pass
+-        // before calling stop.
+-        clearPendingRingingLatches();
+-    }
+-
+-    /**
+-     * Called when the BT HFP profile active state changes.
+-     *
+-     * @param isBtActive A BT device is connected and audio is active.
+-     */
+-    public void updateBtActiveState(boolean isBtActive) {
+-        Log.i(this, "updateBtActiveState: " + isBtActive);
+-        synchronized (mPendingRingingLatches) {
+-            mIsBtActive = isBtActive;
+-            if (isBtActive) mPendingRingingLatches.forEach(CountDownLatch::countDown);
+-        }
+-    }
+-
+-    /**
+-     * Prepares a new ringing ready latch and tracks it in a list. Once the ready latch has been
+-     * used, {@link #removePendingRingingReadyLatch(CountDownLatch)} must be called on this latch.
+-     *
+-     * @param isHfpDeviceConnected true if there is a HFP device connected.
+-     * @return the newly prepared CountDownLatch
+-     */
+-    private CountDownLatch prepareRingingReadyLatch(boolean isHfpDeviceConnected) {
+-        CountDownLatch latch = new CountDownLatch(1);
+-        synchronized (mPendingRingingLatches) {
+-            // We only want to delay ringing if BT is connected but not active yet.
+-            boolean isDelayRequired = isHfpDeviceConnected && !mIsBtActive;
+-            Log.i(this, "prepareRingingReadyLatch:"
+-                    + " connected=" + isHfpDeviceConnected
+-                    + ", BT active=" + mIsBtActive
+-                    + ", isDelayRequired=" + isDelayRequired);
+-            if (!isDelayRequired) latch.countDown();
+-            mPendingRingingLatches.add(latch);
+-        }
+-        return latch;
+-    }
+-
+-    /**
+-     * Remove a ringing ready latch that has been used and is no longer pending.
+-     *
+-     * @param l The latch to remove.
+-     */
+-    private void removePendingRingingReadyLatch(CountDownLatch l) {
+-        synchronized (mPendingRingingLatches) {
+-            mPendingRingingLatches.remove(l);
+-        }
+-    }
+-
+-    /**
+-     * Count down all pending ringing ready latches and then clear the list.
+-     */
+-    private void clearPendingRingingLatches() {
+-        synchronized (mPendingRingingLatches) {
+-            mPendingRingingLatches.forEach(CountDownLatch::countDown);
+-            mPendingRingingLatches.clear();
+-        }
+     }
+ 
+     /**
+@@ -241,7 +168,6 @@ public class AsyncRingtonePlayer {
+         BiConsumer<Pair<Uri, Ringtone>, Boolean> ringtoneConsumer =
+                 (BiConsumer<Pair<Uri, Ringtone>, Boolean>) args.arg2;
+         Session session = (Session) args.arg3;
+-        CountDownLatch ringingReadyLatch = (CountDownLatch) args.arg4;
+         args.recycle();
+ 
+         Log.continueSession(session, "ARP.hP");
+@@ -250,7 +176,7 @@ public class AsyncRingtonePlayer {
+             // consumer a chance to do anything no matter what.
+             if (mHandler.hasMessages(EVENT_STOP)) {
+                 Log.i(this, "handlePlay: skipping play early due to pending STOP");
+-                removePendingRingingReadyLatch(ringingReadyLatch);
++
+                 ringtoneConsumer.accept(null, /* stopped= */ true);
+                 return;
+             }
+@@ -258,21 +184,12 @@ public class AsyncRingtonePlayer {
+             Uri ringtoneUri = null;
+             boolean hasStopped = false;
+             try {
+-                try {
+-                    Log.i(this, "handlePlay: delay ring for ready signal...");
+-                    boolean reachedZero = ringingReadyLatch.await(PLAY_DELAY_TIMEOUT_MS,
+-                            TimeUnit.MILLISECONDS);
+-                    Log.i(this, "handlePlay: ringing ready, timeout=" + !reachedZero);
+-                } catch (InterruptedException e) {
+-                    Log.w(this, "handlePlay: latch exception: " + e);
+-                }
+                 if (ringtoneInfoSupplier != null && ringtoneInfoSupplier.get() != null) {
+                     ringtoneUri = ringtoneInfoSupplier.get().first;
+                     ringtone = ringtoneInfoSupplier.get().second;
+                 }
+ 
+-                // Ringtone supply can be slow or stop command could have been issued while waiting
+-                // for BT to move to CONNECTED state. Re-check for stop event.
++                // Ringtone supply can be slow. Re-check for a stop issued during loading.
+                 if (mHandler.hasMessages(EVENT_STOP)) {
+                     Log.i(this, "handlePlay: skipping play due to pending STOP");
+                     hasStopped = true;
+@@ -297,7 +214,6 @@ public class AsyncRingtonePlayer {
+                 mRingtone.play();
+                 Log.i(this, "Play ringtone, looping.");
+             } finally {
+-                removePendingRingingReadyLatch(ringingReadyLatch);
+                 ringtoneConsumer.accept(new Pair(ringtoneUri, ringtone), hasStopped);
+             }
+         } finally {
+@@ -370,7 +286,6 @@ public class AsyncRingtonePlayer {
+         BiConsumer<Pair<Uri, Ringtone>, Boolean> ringtoneConsumer =
+                 (BiConsumer<Pair<Uri, Ringtone>, Boolean>) args.arg2;
+         Session session = (Session) args.arg3;
+-        CountDownLatch ringingReadyLatch = (CountDownLatch) args.arg4;
+ 
+         Log.continueSession(session, "ARP.hPE");
+         try {
+@@ -379,28 +294,15 @@ public class AsyncRingtonePlayer {
+                 Log.i(this,
+                         "handlePlay: skipping play early (path 1) as mIsPlaying "
+                                 + "is false.");
+-                removePendingRingingReadyLatch(ringingReadyLatch);
++
+                 ringtoneConsumer.accept(null, /* stopped= */ true);
+                 return;
+             }
+-
+             Ringtone localRingtoneInstance = null;
+             Uri localRingtoneUri = null;
+             boolean stoppedMidProcessing = false;
+ 
+             try {
+-                try {
+-                    Log.i(this, "handlePlay: delay ring for ready signal...");
+-                    if (ringingReadyLatch != null) {
+-                        boolean reachedZero = ringingReadyLatch.await(PLAY_DELAY_TIMEOUT_MS,
+-                                TimeUnit.MILLISECONDS);
+-                        Log.i(this, "handlePlay: ringing ready, timeout="
+-                                + !reachedZero);
+-                    }
+-                } catch (InterruptedException e) {
+-                    Log.w(this, "handlePlay: latch exception: " + e);
+-                }
+-
+                 if (ringtoneInfoSupplier != null) {
+                     Pair<Uri, Ringtone> info = ringtoneInfoSupplier.get();
+                     if (info != null) {
+@@ -439,7 +341,6 @@ public class AsyncRingtonePlayer {
+                 Log.i(this, "Play ringtone, looping (mRingtone).");
+ 
+             } finally {
+-                removePendingRingingReadyLatch(ringingReadyLatch);
+                 ringtoneConsumer.accept(new Pair<>(localRingtoneUri, localRingtoneInstance),
+                         stoppedMidProcessing);
+             }
+diff --git a/src/com/android/server/telecom/CallAudioRouteController.java b/src/com/android/server/telecom/CallAudioRouteController.java
+index 4169054687108c8ea7dcac8b0ecd518bc95f367b..e2a6f84dfc0263ebf1806027d1b4246ffff6aebc 100644
+--- a/src/com/android/server/telecom/CallAudioRouteController.java
++++ b/src/com/android/server/telecom/CallAudioRouteController.java
+@@ -2739,7 +2739,6 @@ public class CallAudioRouteController extends CallsManagerListenerBase
+                                 previousCommunicationDevice.getAddress())) {
+                     handleBtConnectionStateChanged(
+                             previousCommunicationDevice.getAddress(), false /* isScoConnected */);
+-                    mRingtonePlayer.updateBtActiveState(false);
+                 }
+             }
+ 
+@@ -2759,7 +2758,6 @@ public class CallAudioRouteController extends CallsManagerListenerBase
+                 // Signal BT_AUDIO_CONNECTED if needed
+                 handleBtConnectionStateChanged(
+                         newCommunicationDevice.getAddress(), true /* isScoConnected */);
+-                mRingtonePlayer.updateBtActiveState(true);
+             }
+         }
+     }
+diff --git a/tests/src/com/android/server/telecom/tests/AsyncRingtonePlayerTest.java b/tests/src/com/android/server/telecom/tests/AsyncRingtonePlayerTest.java
+index 3e5d25dc1692e2a894107bc75aee549bbfda7dd4..1aa732a562a74404e5c92a74a619a7ed891799b9 100644
+--- a/tests/src/com/android/server/telecom/tests/AsyncRingtonePlayerTest.java
++++ b/tests/src/com/android/server/telecom/tests/AsyncRingtonePlayerTest.java
+@@ -16,171 +16,131 @@
+ 
+ package com.android.server.telecom.tests;
+ 
++import static org.junit.Assert.assertFalse;
++import static org.junit.Assert.assertTrue;
+ import static org.mockito.ArgumentMatchers.any;
+ import static org.mockito.ArgumentMatchers.eq;
++import static org.mockito.Mockito.clearInvocations;
+ import static org.mockito.Mockito.doAnswer;
+-import static org.mockito.Mockito.mock;
+ import static org.mockito.Mockito.never;
+-import static org.mockito.Mockito.timeout;
+ import static org.mockito.Mockito.verify;
+ import static org.mockito.Mockito.when;
+-import static org.junit.Assert.assertTrue;
+-import static org.junit.Assert.assertFalse;
+-import static org.junit.Assert.assertNotNull;
+ 
+ import android.media.Ringtone;
+ import android.net.Uri;
+ import android.util.Pair;
+-
+ import androidx.test.filters.SmallTest;
+-
+ import com.android.server.telecom.AsyncRingtonePlayer;
+-import com.android.server.telecom.flags.FeatureFlags;
+-
+ import org.junit.After;
+ import org.junit.Before;
+ import org.junit.Test;
+ import org.junit.runner.RunWith;
+ import org.junit.runners.JUnit4;
+ import org.mockito.Mock;
+-
+ import java.util.concurrent.CountDownLatch;
+ import java.util.concurrent.TimeUnit;
+ import java.util.function.BiConsumer;
+ import java.util.function.Supplier;
+ 
+ @RunWith(JUnit4.class)
++@SmallTest
+ public class AsyncRingtonePlayerTest extends TelecomTestCase {
+-
+     @Mock private Ringtone mRingtone;
+     @Mock private Supplier<Pair<Uri, Ringtone>> mRingtoneSupplier;
+     @Mock private BiConsumer<Pair<Uri, Ringtone>, Boolean> mRingtoneConsumer;
++    private AsyncRingtonePlayer mPlayer;
++    private final Uri mUri = Uri.parse("content://media/internal/audio/media/1");
+ 
+-    private AsyncRingtonePlayer mAsyncRingtonePlayer;
+-    private Uri mRingtoneUri = Uri.parse("content://media/internal/audio/media/1");
+-
+-    @Override
+     @Before
++    @Override
+     public void setUp() throws Exception {
+         super.setUp();
+-        mAsyncRingtonePlayer = new AsyncRingtonePlayer(mFeatureFlags);
+-        when(mRingtoneSupplier.get()).thenReturn(new Pair<>(mRingtoneUri, mRingtone));
++        mPlayer = new AsyncRingtonePlayer(mFeatureFlags);
++        when(mRingtoneSupplier.get()).thenReturn(new Pair<>(mUri, mRingtone));
+     }
+ 
+-    @Override
+     @After
++    @Override
+     public void tearDown() throws Exception {
+-        mAsyncRingtonePlayer.stop();
++        mPlayer.stop();
+         super.tearDown();
+     }
+ 
+-    @SmallTest
+-    @Test
+-    public void testPlay() {
+-        mAsyncRingtonePlayer.play(mRingtoneSupplier, mRingtoneConsumer,
+-                false /* isHfpDeviceConnected */);
+-
+-        verify(mRingtone, timeout(1000)).play();
+-        verify(mRingtoneConsumer, timeout(1000)).accept(any(), eq(false));
+-        assertTrue(mAsyncRingtonePlayer.isPlaying());
+-    }
+-
+-    @SmallTest
+-    @Test
+-    public void testStop() {
+-        mAsyncRingtonePlayer.play(mRingtoneSupplier, mRingtoneConsumer, false);
+-        verify(mRingtone, timeout(1000)).play();
+-
+-        mAsyncRingtonePlayer.stop();
+-        verify(mRingtone, timeout(1000)).stop();
+-        assertFalse(mAsyncRingtonePlayer.isPlaying());
++    private void playAndAwait(boolean hfpConnected) throws Exception {
++        CountDownLatch played = new CountDownLatch(1);
++        CountDownLatch consumed = new CountDownLatch(1);
++        doAnswer(invocation -> { played.countDown(); return null; }).when(mRingtone).play();
++        doAnswer(invocation -> { consumed.countDown(); return null; })
++                .when(mRingtoneConsumer).accept(any(), eq(false));
++        mPlayer.play(mRingtoneSupplier, mRingtoneConsumer, hfpConnected);
++        assertTrue("Playback must not require a Bluetooth callback", played.await(500, TimeUnit.MILLISECONDS));
++        assertTrue("Ringtone completion callback missing", consumed.await(5, TimeUnit.SECONDS));
++        verify(mRingtone).play();
++        verify(mRingtoneConsumer).accept(any(), eq(false));
++        assertTrue(mPlayer.isPlaying());
+     }
+ 
+-    @SmallTest
+-    @Test
+-    public void testPlayWithHfpDelay() throws InterruptedException {
+-        // HFP connected, but not active initially.
+-        mAsyncRingtonePlayer.play(mRingtoneSupplier, mRingtoneConsumer,
+-                true /* isHfpDeviceConnected */);
+-
+-        // Should not play immediately
+-        verify(mRingtone, never()).play();
+-        assertTrue(mAsyncRingtonePlayer.isPlaying());
+-
+-        // Now activate BT
+-        mAsyncRingtonePlayer.updateBtActiveState(true);
+-
+-        // Should play now
+-        verify(mRingtone, timeout(1000)).play();
+-        verify(mRingtoneConsumer, timeout(1000)).accept(any(), eq(false));
++    private void stopAndAwait() throws Exception {
++        CountDownLatch stopped = new CountDownLatch(1);
++        doAnswer(invocation -> { stopped.countDown(); return null; }).when(mRingtone).stop();
++        mPlayer.stop();
++        assertTrue("Ringtone was not stopped", stopped.await(5, TimeUnit.SECONDS));
++        assertFalse(mPlayer.isPlaying());
+     }
+ 
+-    @SmallTest
+     @Test
+-    public void testStopDuringHfpDelay() throws InterruptedException {
+-        mAsyncRingtonePlayer.play(mRingtoneSupplier, mRingtoneConsumer,
+-                true /* isHfpDeviceConnected */);
+-
+-        // Stop before BT becomes active
+-        mAsyncRingtonePlayer.stop();
+-
+-        // Should not play even if we wait
+-        verify(mRingtone, never()).play();
+-
+-        // Consumer should be called with stopped=true
+-        verify(mRingtoneConsumer, timeout(1000)).accept(any(), eq(true));
+-        assertFalse(mAsyncRingtonePlayer.isPlaying());
++    public void testPlayWithoutHeadset() throws Exception {
++        playAndAwait(false);
+     }
+ 
+-    @SmallTest
+     @Test
+-    public void testPlayWhenStoppedEarly() {
+-        // Verify mIsPlaying check at start of handlePlayExecutor
+-
+-        when(mRingtoneSupplier.get()).thenReturn(null);
+-        mAsyncRingtonePlayer.play(mRingtoneSupplier, mRingtoneConsumer, false);
+-
+-        verify(mRingtone, never()).play();
+-        verify(mRingtoneConsumer, timeout(1000)).accept(any(), eq(false));
++    public void testFirstHfpCallPlaysWithoutScoReadyCallback() throws Exception {
++        playAndAwait(true);
+     }
+ 
+-    @SmallTest
+     @Test
+-    public void testUpdateBtActiveState() {
+-        // Verifying it doesn't crash when no latches are pending
+-        mAsyncRingtonePlayer.updateBtActiveState(true);
+-        mAsyncRingtonePlayer.updateBtActiveState(false);
++    public void testRepeatedHfpCallDoesNotDependOnPreviousReadyState() throws Exception {
++        playAndAwait(true);
++        stopAndAwait();
++        clearInvocations(mRingtone, mRingtoneConsumer);
++        playAndAwait(true);
+     }
+ 
+-    @SmallTest
+     @Test
+-    public void testExecutorRecreation() {
+-        mAsyncRingtonePlayer.play(mRingtoneSupplier, mRingtoneConsumer, false);
+-        verify(mRingtone, timeout(1000)).play();
+-
+-        mAsyncRingtonePlayer.stop();
+-        verify(mRingtone, timeout(1000)).stop();
+-
+-        // Call play again
+-        mAsyncRingtonePlayer.play(mRingtoneSupplier, mRingtoneConsumer, false);
+-        verify(mRingtone, timeout(1000).times(2)).play();
++    public void testStop() throws Exception {
++        playAndAwait(true);
++        stopAndAwait();
+     }
+ 
+-    @SmallTest
+     @Test
+-    public void testIsPlayingState() {
+-        assertFalse(mAsyncRingtonePlayer.isPlaying());
+-
+-        mAsyncRingtonePlayer.play(mRingtoneSupplier, mRingtoneConsumer, false);
+-        assertTrue(mAsyncRingtonePlayer.isPlaying());
+-
+-        mAsyncRingtonePlayer.stop();
+-        assertFalse(mAsyncRingtonePlayer.isPlaying());
++    public void testStopWhileRingtoneIsLoadingPreventsPlayback() throws Exception {
++        CountDownLatch loading = new CountDownLatch(1);
++        CountDownLatch release = new CountDownLatch(1);
++        CountDownLatch consumed = new CountDownLatch(1);
++        when(mRingtoneSupplier.get()).thenAnswer(invocation -> {
++            loading.countDown();
++            assertTrue(release.await(5, TimeUnit.SECONDS));
++            return new Pair<>(mUri, mRingtone);
++        });
++        doAnswer(invocation -> { consumed.countDown(); return null; })
++                .when(mRingtoneConsumer).accept(any(), eq(true));
++        mPlayer.play(mRingtoneSupplier, mRingtoneConsumer, true);
++        assertTrue(loading.await(5, TimeUnit.SECONDS));
++        mPlayer.stop();
++        release.countDown();
++        assertTrue(consumed.await(5, TimeUnit.SECONDS));
++        verify(mRingtone, never()).play();
++        assertFalse(mPlayer.isPlaying());
+     }
+ 
+-    @SmallTest
+     @Test
+-    public void testGetLooper() {
+-        assertNotNull(mAsyncRingtonePlayer.getLooper());
++    public void testMissingRingtoneStillCompletesConsumer() throws Exception {
++        CountDownLatch consumed = new CountDownLatch(1);
++        when(mRingtoneSupplier.get()).thenReturn(null);
++        doAnswer(invocation -> { consumed.countDown(); return null; })
++                .when(mRingtoneConsumer).accept(any(), eq(false));
++        mPlayer.play(mRingtoneSupplier, mRingtoneConsumer, true);
++        assertTrue(consumed.await(5, TimeUnit.SECONDS));
++        verify(mRingtone, never()).play();
+     }
+ }
+diff --git a/tests/src/com/android/server/telecom/tests/RingerTest.java b/tests/src/com/android/server/telecom/tests/RingerTest.java
+index e607ea659d59c8c857588aa2fa16ebfb40950796..be138ea5fcd7ecb95ec856601a1e51fc1bbeaf1a 100644
+--- a/tests/src/com/android/server/telecom/tests/RingerTest.java
++++ b/tests/src/com/android/server/telecom/tests/RingerTest.java
+@@ -197,7 +197,6 @@ public class RingerTest extends TelecomTestCase {
+         when(mContext.getResources()).thenReturn(mMockResources);
+         // Set BT active state in tests to ensure that we do not end up blocking tests for 1 sec
+         // waiting for BT to connect in unit tests by default.
+-        asyncRingtonePlayer.updateBtActiveState(true);
+ 
+         createRingerUnderTest();
+     }
+@@ -738,84 +737,32 @@ public class RingerTest extends TelecomTestCase {
+ 
+     @SmallTest
+     @Test
+-    public void testDelayRingerForBtHfpDevices() throws Exception {
+-        if (true) {
+-            // skip until b/470399806 is fixed
+-            return;
+-        }
+-        delayRingerForBtHfpDevicesExecutor();
+-    }
+-
+-    private void delayRingerForBtHfpDevicesExecutor() throws Exception {
+-        asyncRingtonePlayer.updateBtActiveState(false);
+-        Ringtone mockRingtone = ensureRingtoneMocked();
+-
++    public void testRingerStartsForHfpWithoutBluetoothReadyCallback() throws Exception {
++        Ringtone ringtone = ensureRingtoneMocked();
+         ensureRingerIsAudible();
+-        assertTrue(mRingerUnderTest.startRinging(mockCall1, true /* isHfpDeviceConnected */));
++        assertTrue(startRingingAndWaitForAsync(mockCall1, true));
++        verify(ringtone).play();
+         assertTrue(mRingerUnderTest.isRinging());
+-
+-        // For Executor, the PlayRunnable is submitted and runs up to the latch await on its own.
+-        // At this point, ringtone play should be delayed
+-        verify(mockRingtone, never()).play(); // Verify play() has NOT been called yet
+-
+-        // Now, simulate BT HFP audio becoming active
+-        asyncRingtonePlayer.updateBtActiveState(true);
+-        // For Executor, the latch is released, and PlayRunnable proceeds on its own.
+-
+-        // Wait for the asynchronous play operation to complete its BiConsumer callback
+-        try {
+-            mRingCompletionFuture.get(1, TimeUnit.SECONDS);
+-        } catch (Exception e) {
+-            throw new AssertionError("mRingCompletionFuture did not complete after BT" +
+-                    " active state update in Executor path.", e);
+-        }
+-
+-        // Verifications after play should have started
+-        verify(mockRingtoneFactory, atLeastOnce())
+-                .getRingtone(any(Call.class), nullable(VolumeShaper.Configuration.class),
+-                        anyBoolean());
+-        verifyNoMoreInteractions(mockRingtoneFactory);
+-        verify(mockRingtone).play();
+-
+-        // Now stop ringing
+-        mRingerUnderTest.stopRinging();
+-
+-        // For Executor, the StopRunnable is posted.
+-        // Wait for the stop() call on the mockRingtone with a timeout.
+-        verify(mockRingtone, timeout(500).times(1)).stop();
+-
+-        assertFalse(mRingerUnderTest.isRinging()); // Ringer state should be updated
+     }
+ 
+     @SmallTest
+     @Test
+-    public void testUnblockRingerForStopCommand() throws Exception {
+-        unblockRingerForStopCommandExecutor();
+-    }
+-
+-    private void unblockRingerForStopCommandExecutor() {
+-        asyncRingtonePlayer.updateBtActiveState(false); // Make play wait on latch
+-        Ringtone mockRingtone = ensureRingtoneMocked();
+-
++    public void testStopWhileRingtoneFactoryIsLoading() throws Exception {
++        Ringtone ringtone = ensureRingtoneMocked();
++        CountDownLatch loading = new CountDownLatch(1);
++        CompletableFuture<Pair<Uri, Ringtone>> supplied = new CompletableFuture<>();
++        when(mockRingtoneFactory.getRingtone(any(Call.class), any(), anyBoolean()))
++                .thenAnswer(invocation -> {
++                    loading.countDown();
++                    return supplied.get(5, TimeUnit.SECONDS);
++                });
+         ensureRingerIsAudible();
+-        assertTrue(mRingerUnderTest.startRinging(mockCall1, true /* isHfpDeviceConnected */));
+-
++        assertTrue(mRingerUnderTest.startRinging(mockCall1, true));
++        assertTrue(loading.await(5, TimeUnit.SECONDS));
+         mRingerUnderTest.stopRinging();
+-        try {
+-            // Wait for the play pathway in AsyncRingtonePlayer to acknowledge the stop
+-            // by invoking its consumer, which in turn completes this future.
+-            mRingCompletionFuture.get(1, TimeUnit.SECONDS);
+-        } catch (Exception e) {
+-            throw new AssertionError("mRingCompletionFuture did not complete after" +
+-                    " stopRinging. Indicates play operation was not properly unblocked and" +
+-                    " terminated", e);
+-        }
+-
+-        // Verifications:
+-        // 1. The ringtone should never have started playing because it was stopped while waiting.
+-        verify(mockRingtone, never()).play();
+-
+-        // 2. The Ringer itself should no longer be in a ringing state.
++        supplied.complete(new Pair<>(FAKE_RINGTONE_URI, ringtone));
++        mRingCompletionFuture.get(5, TimeUnit.SECONDS);
++        verify(ringtone, never()).play();
+         assertFalse(mRingerUnderTest.isRinging());
+     }
+ 
