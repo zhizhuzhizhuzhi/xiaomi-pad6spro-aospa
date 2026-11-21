@@ -40,4 +40,4 @@ OUT_DIR=out-sheng-user python3 ../aospa-sheng-kit/scripts/package.py "$PWD" \
 
 For userdebug, select `userdebug` and use `OUT_DIR=out-sheng-userdebug`. Outputs stay separate. Sheng uses its matched prebuilt kernel, not Fuxi's kernel preparation. These commands produce development builds; selecting user does not perform release signing.
 
-The underlying layout passed a complete incremental target-files build on 2026-10-28. This source-kit conversion validates exact source-delta replay; it is not a new fresh-sync/full-build claim. See [VALIDATION.md](docs/VALIDATION.md) and [licensing](LICENSE.md).
+See [licensing](LICENSE.md).

@@ -67,11 +67,8 @@ each kernel module merely to add a prebuilt-kernel guard. Kernel header host too
 tool checkouts are excluded. The separately built Caps Lock module uses the
 matched GKI source and toolchain. Fuxi vendor and MiuiCamera projects are excluded from this product.
 
-## Validation and license
+## License
 
-The 20261027 release passed full builds and basic hardware validation. That is
-historical evidence; validation of this layout is recorded separately and must
-not be described as a newly passed full ROM build before it actually completes.
 Original per-file AOSPA/LineageOS attribution is retained. Configuration is
 generally Apache-2.0; kernel/module code follows its GPL/UAPI notices; closed
 inputs retain their original licenses. Release signing keys are not included.

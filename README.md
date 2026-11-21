@@ -75,5 +75,3 @@ OUT_DIR=out-sheng-user python3 ../aospa-sheng-kit/scripts/package.py "$PWD" \
 - `scripts/`：准备输入、构建和 Fastboot 打包。
 - `dependencies.json`：设备及公共输入校验清单。
 - `licenses/`：上游许可证；原文件版权保留。
-
-该源码布局于 2026-10-28 通过完整目标增量编译；本次重新整理对源码修改做了逐文件回放校验，不声称重新完成 fresh sync 或全量编译。详见 [验证记录](docs/VALIDATION.md)。
