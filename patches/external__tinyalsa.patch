@@ -1,5 +1,5 @@
 diff --git a/include/tinyalsa/mixer_plugin.h b/include/tinyalsa/mixer_plugin.h
-index 80fd9f847999f704e58dcef3b86bd15e9fba4724..f3682b6d0b44746467b4e1f079212cca5ae18afe 100644
+index 80fd9f8..f3682b6 100644
 --- a/include/tinyalsa/mixer_plugin.h
 +++ b/include/tinyalsa/mixer_plugin.h
 @@ -31,7 +31,6 @@
@@ -19,7 +19,7 @@ index 80fd9f847999f704e58dcef3b86bd15e9fba4724..f3682b6d0b44746467b4e1f079212cca
  
  struct snd_value_enum {
 diff --git a/mixer_plugin.c b/mixer_plugin.c
-index 673d30701d41d3387bbc048f5489046bd3056297..593dbb69c0cee6fbb6ddb7ba114c795c719fb8b2 100644
+index 673d307..593dbb6 100644
 --- a/mixer_plugin.c
 +++ b/mixer_plugin.c
 @@ -39,6 +39,7 @@

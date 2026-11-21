@@ -1,5 +1,5 @@
 diff --git a/framework/src/android/net/ConnectivitySettingsManager.java b/framework/src/android/net/ConnectivitySettingsManager.java
-index 18be573a2643f947caabfc730b3a2bb6265b3eab..8a5fbedbac03bb971430d22d9930eefdc9fd94ff 100644
+index 18be573..8a5fbed 100644
 --- a/framework/src/android/net/ConnectivitySettingsManager.java
 +++ b/framework/src/android/net/ConnectivitySettingsManager.java
 @@ -43,6 +43,7 @@ import android.os.Process;
@@ -21,7 +21,7 @@ index 18be573a2643f947caabfc730b3a2bb6265b3eab..8a5fbedbac03bb971430d22d9930eefd
          try {
              config = ccm.getConfigForSubId(subId, keys);
 diff --git a/tests/unit/java/com/android/server/connectivity/NetdEventListenerServiceTest.java b/tests/unit/java/com/android/server/connectivity/NetdEventListenerServiceTest.java
-index 89e2a51bb35274f00fb66218c037215cb648ed4d..78e55b2e090fe89010c56286f13a096bd8863770 100644
+index 89e2a51..78e55b2 100644
 --- a/tests/unit/java/com/android/server/connectivity/NetdEventListenerServiceTest.java
 +++ b/tests/unit/java/com/android/server/connectivity/NetdEventListenerServiceTest.java
 @@ -22,18 +22,25 @@ import static com.android.testutils.MiscAsserts.assertStringContains;

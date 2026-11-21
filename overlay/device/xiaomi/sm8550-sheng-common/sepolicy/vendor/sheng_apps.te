@@ -1,0 +1,3 @@
+# Only the platform-signed Soter frontend receives these Soter/fingerprint grants.
+hal_client_domain(sheng_soter_app, vendor_hal_soter)
+get_prop(sheng_soter_app, vendor_fp_prop)

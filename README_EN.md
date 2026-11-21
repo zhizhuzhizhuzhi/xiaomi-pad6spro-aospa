@@ -29,10 +29,17 @@ bash ../aospa-sheng-kit/scripts/prepare.sh "$PWD" /path/to/stock-dump \
 
 See [DEVICE_INPUTS.md](docs/DEVICE_INPUTS.md). `dependencies.json` pins the exact prepared files. Missing inputs stop the build; firmware, proprietary payloads and private signing keys are not committed.
 
+Prepared inputs from a matching source tree can be installed directly:
+
+```sh
+python3 ../aospa-sheng-kit/scripts/fetch-dependencies.py "$PWD" \
+  --source /path/to/prepared-sheng-inputs --replace-stock-inputs
+```
+
 ## Build and package
 
 ```sh
-BUILD_NUMBER=20261029 bash ../aospa-sheng-kit/scripts/build.sh "$PWD" user "$(nproc)"
+BUILD_NUMBER=20261121 bash ../aospa-sheng-kit/scripts/build.sh "$PWD" user "$(nproc)"
 OUT_DIR=out-sheng-user python3 ../aospa-sheng-kit/scripts/package.py "$PWD" \
   out-sheng-user/target/product/sheng/obj/PACKAGING/target_files_intermediates/aospa_sheng-target_files.zip \
   "$PWD/aospa_sheng-fastboot-user.zip"

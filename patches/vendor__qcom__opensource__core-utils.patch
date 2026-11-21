@@ -1,5 +1,5 @@
 diff --git a/vendor_framework_compatibility_matrix.xml b/vendor_framework_compatibility_matrix.xml
-index e4297fbde0d1ed74404e8124cdfa17114f74fc25..f74688d6d0a03881f204ebabf1227de40dd94a7d 100644
+index e4297fb..f74688d 100644
 --- a/vendor_framework_compatibility_matrix.xml
 +++ b/vendor_framework_compatibility_matrix.xml
 @@ -1090,23 +1090,9 @@ SPDX-License-Identifier: BSD-3-Clause-Clear.

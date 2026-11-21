@@ -1,27 +1,11 @@
-diff --git a/dlkm/qti-dlkm.mk b/dlkm/qti-dlkm.mk
-index 3af11f72c5ad8c4af7e69fcd0cf3ec33760a209c..c40ee7b42293fd0958dbe73ab4f4770617ca16bd 100644
---- a/dlkm/qti-dlkm.mk
-+++ b/dlkm/qti-dlkm.mk
-@@ -5,7 +5,11 @@
- 
- include $(QCOM_COMMON_PATH)/dlkm/kernel-platform.mk
- 
-+# Device-owned prebuilt kernels do not build source DLKM packages.
-+ifneq ($(TARGET_KERNEL_DLKM_DISABLE),true)
- $(foreach vbdefs, $(sort $(wildcard vendor/qcom/defs/board-defs/vendor/*.mk)), \
-     $(call inherit-product, $(vbdefs)))
- $(foreach vpdefs, $(sort $(wildcard vendor/qcom/defs/product-defs/vendor/*.mk)), \
-     $(call inherit-product, $(vpdefs)))
-+
-+endif
 diff --git a/sepolicy/generic/vendor/common/vndservice_contexts b/sepolicy/generic/vendor/common/vndservice_contexts
-index d46d1ae69aa83c19c7b19807ceb9f725205b493f..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 100644
+index d46d1ae..e69de29 100644
 --- a/sepolicy/generic/vendor/common/vndservice_contexts
 +++ b/sepolicy/generic/vendor/common/vndservice_contexts
 @@ -1 +0,0 @@
 -vendor.qti.data.qmsservice.IQmsService  u:object_r:vendor_qms_service:s0
 diff --git a/sepolicy/qva/vendor/common/hwservice_contexts b/sepolicy/qva/vendor/common/hwservice_contexts
-index d554e0b15c71d9154779589257125bf69ca3e128..4cdd3f1d202a87fbeb0c8ded9f9d46a7b5ca17c2 100644
+index d554e0b..4cdd3f1 100644
 --- a/sepolicy/qva/vendor/common/hwservice_contexts
 +++ b/sepolicy/qva/vendor/common/hwservice_contexts
 @@ -6,7 +6,6 @@ vendor.qti.esepowermanager::IEsePowerManager                 u:object_r:vendor_h
@@ -33,7 +17,7 @@ index d554e0b15c71d9154779589257125bf69ca3e128..4cdd3f1d202a87fbeb0c8ded9f9d46a7
  vendor.qti.hardware.audiohalext::IAudioHalExt                u:object_r:hal_audio_hwservice:s0
  com.qualcomm.qti.imscmservice::IImsCmService                 u:object_r:vendor_hal_imsrcsd_hwservice:s0
 diff --git a/sepolicy/qva/vendor/common/ssgtzd.te b/sepolicy/qva/vendor/common/ssgtzd.te
-index 4b22c6900d85e79ab8402177e0e545d0eaf6d553..235aab256c1dfed5d0b1c982fd0972f13575039b 100644
+index 4b22c69..235aab2 100644
 --- a/sepolicy/qva/vendor/common/ssgtzd.te
 +++ b/sepolicy/qva/vendor/common/ssgtzd.te
 @@ -3,3 +3,6 @@ allow vendor_ssgtzd self:udp_socket create_socket_perms;
@@ -43,33 +27,8 @@ index 4b22c6900d85e79ab8402177e0e545d0eaf6d553..235aab256c1dfed5d0b1c982fd0972f1
 +
 +# SSG TZ uses the vendor QTR SDK for diagnostic events.
 +qtr_sdk_use(vendor_ssgtzd)
-diff --git a/vendor/alarm/qti-alarm.mk b/vendor/alarm/qti-alarm.mk
-index 73a7b9486a17b51b87bcf638cd890ecdc6bc7692..f7b04837dda7582a2de9629ddf829a2c8c184314 100644
---- a/vendor/alarm/qti-alarm.mk
-+++ b/vendor/alarm/qti-alarm.mk
-@@ -11,4 +11,6 @@ PRODUCT_PACKAGES += \
-     init.qcom.alarm.rc
- 
- # Get non-open-source specific aspects.
-+ifneq ($(TARGET_QTI_SKIP_COMMON_VENDOR_PREBUILTS),true)
- $(call inherit-product-if-exists, vendor/qcom/common/vendor/alarm/alarm-vendor.mk)
-+endif
-diff --git a/vendor/display/qti-display.mk b/vendor/display/qti-display.mk
-index 18ec0aa743856f1188bbc16f4f67bd1561721696..0d366974ac3b992addae68a15553ec16080c21cf 100644
---- a/vendor/display/qti-display.mk
-+++ b/vendor/display/qti-display.mk
-@@ -78,5 +78,9 @@ PRODUCT_COPY_FILES += \
-     $(call find-copy-subdir-files,advanced_sf_offsets.xml,device/qcom/common/vendor/display/$(TARGET_DISP_DIR),$(TARGET_COPY_OUT_VENDOR)/etc/display)
- 
- # Get non-open-source specific aspects.
-+ifneq ($(TARGET_QTI_SKIP_COMMON_VENDOR_PREBUILTS),true)
- $(call inherit-product-if-exists, vendor/qcom/common/vendor/display/$(TARGET_DISP_DIR)/display-vendor.mk)
-+endif
-+ifneq ($(TARGET_QTI_SKIP_COMMON_VENDOR_PREBUILTS),true)
- $(call inherit-product, vendor/qcom/common/vendor/display/display-vendor.mk)
-+endif
 diff --git a/vendor/init/init.qcom.early_boot.legacy.sh b/vendor/init/init.qcom.early_boot.legacy.sh
-index 1c4f50aa5aefd9876273424088b7f0caaa6df2d3..3c2c57e3dcd4307a6b321027bd7ea5858039c2fb 100755
+index 1c4f50a..3c2c57e 100755
 --- a/vendor/init/init.qcom.early_boot.legacy.sh
 +++ b/vendor/init/init.qcom.early_boot.legacy.sh
 @@ -49,8 +49,12 @@ fi
@@ -88,7 +47,7 @@ index 1c4f50aa5aefd9876273424088b7f0caaa6df2d3..3c2c57e3dcd4307a6b321027bd7ea585
  chmod 0666 /dev/hgsl
  chmod system.audio /dev/spidev22.0
 diff --git a/vendor/init/init.qcom.rc b/vendor/init/init.qcom.rc
-index 7a65f22eacff0956e69cb9f788d79fd569831b03..36e854c87b745c0c2dd2b6d5165e234ae7951d3d 100644
+index 7a65f22..36e854c 100644
 --- a/vendor/init/init.qcom.rc
 +++ b/vendor/init/init.qcom.rc
 @@ -67,7 +67,6 @@ import /vendor/etc/init/hw/init.target.rc
@@ -122,7 +81,7 @@ index 7a65f22eacff0956e69cb9f788d79fd569831b03..36e854c87b745c0c2dd2b6d5165e234a
  on property:ro.vendor.ril.mbn_copy_completed=1
      write /data/vendor/radio/copy_complete 1
 diff --git a/vendor/init/init.qti.kernel.rc b/vendor/init/init.qti.kernel.rc
-index 25769c9c83395fb748072ac9eafde24121da3e88..3c16d7934e8cfbba81f477c182a76e3fcaebf709 100644
+index 25769c9..3c16d79 100644
 --- a/vendor/init/init.qti.kernel.rc
 +++ b/vendor/init/init.qti.kernel.rc
 @@ -40,13 +40,6 @@ service memory-init-boot /vendor/bin/sh /vendor/bin/init.kernel.init_boot-memory
@@ -158,7 +117,7 @@ index 25769c9c83395fb748072ac9eafde24121da3e88..3c16d7934e8cfbba81f477c182a76e3f
  on property:vendor.pasr.enabled=false
      stop pasr-hal
 diff --git a/vendor/init/kalama/bin/init.kernel.post_boot-kalama_default_3_4_1.sh b/vendor/init/kalama/bin/init.kernel.post_boot-kalama_default_3_4_1.sh
-index 44bfa7cd7f22a94c3d9fb778b71a38c7bea0e4f5..e76a0c9ffeb99ad24bb8c59e4b376f1720ee7466 100755
+index 44bfa7c..e76a0c9 100755
 --- a/vendor/init/kalama/bin/init.kernel.post_boot-kalama_default_3_4_1.sh
 +++ b/vendor/init/kalama/bin/init.kernel.post_boot-kalama_default_3_4_1.sh
 @@ -114,7 +114,7 @@ echo 325 > /proc/sys/walt/walt_low_latency_task_threshold
@@ -171,7 +130,7 @@ index 44bfa7cd7f22a94c3d9fb778b71a38c7bea0e4f5..e76a0c9ffeb99ad24bb8c59e4b376f17
  # Turn off scheduler boost at the end
  echo 0 > /proc/sys/walt/sched_boost
 diff --git a/vendor/init/kalama/bin/init.kernel.post_boot.sh b/vendor/init/kalama/bin/init.kernel.post_boot.sh
-index f5ed36d2c5f97f15372db8fe90b8cea55c1aaa2f..b5d3d367250345b2ff7489c7c4968eff620d7a6a 100755
+index f5ed36d..b5d3d36 100755
 --- a/vendor/init/kalama/bin/init.kernel.post_boot.sh
 +++ b/vendor/init/kalama/bin/init.kernel.post_boot.sh
 @@ -77,35 +77,6 @@ function configure_zram_parameters() {
@@ -221,7 +180,7 @@ index f5ed36d2c5f97f15372db8fe90b8cea55c1aaa2f..b5d3d367250345b2ff7489c7c4968eff
  	# Disable periodic kcompactd wakeups. We do not use THP, so having many
  	# huge pages is not as necessary.
 diff --git a/vendor/init/kalama/etc/init/init.aospa.perf.soc.rc b/vendor/init/kalama/etc/init/init.aospa.perf.soc.rc
-index aeb5cabf01c100072d8a684cfe46d54fc287e327..b0d999e9a062cff5e92c00760f30ffa2c49c268f 100644
+index aeb5cab..b0d999e 100644
 --- a/vendor/init/kalama/etc/init/init.aospa.perf.soc.rc
 +++ b/vendor/init/kalama/etc/init/init.aospa.perf.soc.rc
 @@ -4,6 +4,9 @@
@@ -235,7 +194,7 @@ index aeb5cabf01c100072d8a684cfe46d54fc287e327..b0d999e9a062cff5e92c00760f30ffa2
      write /dev/cpuset/foreground/cpus 0-6
      setprop dalvik.vm.dex2oat-cpu-set 0,1,2,3,4,5,6
 diff --git a/vendor/init/qti-init.mk b/vendor/init/qti-init.mk
-index a18902d3637c6f3a768a3b313d1d0a1a8b2b844a..20756e35c9ca09a21ad1b9a1b65c20c67b06b2d7 100644
+index a18902d..20756e3 100644
 --- a/vendor/init/qti-init.mk
 +++ b/vendor/init/qti-init.mk
 @@ -35,7 +35,6 @@ PRODUCT_PACKAGES += \
@@ -247,7 +206,7 @@ index a18902d3637c6f3a768a3b313d1d0a1a8b2b844a..20756e35c9ca09a21ad1b9a1b65c20c6
      init.qcom.class_core.sh \
      init.qcom.coex.sh \
 diff --git a/vendor/init/system_dlkm_modprobe.sh b/vendor/init/system_dlkm_modprobe.sh
-index 7c1f2d88f8ce75a786f69497eb374dd6463abb5c..e253c561f2a64ba1bec1374d6da3f43065889356 100644
+index 7c1f2d8..e253c56 100644
 --- a/vendor/init/system_dlkm_modprobe.sh
 +++ b/vendor/init/system_dlkm_modprobe.sh
 @@ -5,7 +5,7 @@
@@ -260,7 +219,7 @@ index 7c1f2d88f8ce75a786f69497eb374dd6463abb5c..e253c561f2a64ba1bec1374d6da3f430
  
  MODPROBE="/vendor/bin/modprobe"
 diff --git a/vendor/perf/configs/kalama/perf/perfconfigstore.xml b/vendor/perf/configs/kalama/perf/perfconfigstore.xml
-index 1434fc84cdad5faea09f193d04646c48d39813b9..91bd6e2f2adffde2f4f1533bfed3e1871b00804d 100644
+index 1434fc8..91bd6e2 100644
 --- a/vendor/perf/configs/kalama/perf/perfconfigstore.xml
 +++ b/vendor/perf/configs/kalama/perf/perfconfigstore.xml
 @@ -97,7 +97,8 @@ ________________________________________________________________________________
@@ -273,63 +232,3 @@ index 1434fc84cdad5faea09f193d04646c48d39813b9..91bd6e2f2adffde2f4f1533bfed3e187
  
      </PerfConfigs>
  </PerfConfigsStore>
-diff --git a/vendor/perf/qti-perf.mk b/vendor/perf/qti-perf.mk
-index 5fac9081caaef2f222258ed46d1897b3b475296d..cdb609242861fa27be9f72eec1acb743a425db27 100644
---- a/vendor/perf/qti-perf.mk
-+++ b/vendor/perf/qti-perf.mk
-@@ -16,9 +16,14 @@ else
-     TARGET_PERF_DIR := $(TARGET_BOARD_PLATFORM)
- endif
- 
--PRODUCT_COPY_FILES += \
-+# Sheng uses the matching stock 2.3 configs; keep unrelated common files.
-+SHENG_STOCK_PERF_DESTINATIONS :=
-+ifeq ($(TARGET_PRODUCT),aospa_sheng)
-+SHENG_STOCK_PERF_DESTINATIONS := $(addprefix %:$(TARGET_COPY_OUT_VENDOR)/etc/perf/,$(notdir $(wildcard device/xiaomi/sheng/performance/etc/perf/*)))
-+endif
-+PRODUCT_COPY_FILES += $(filter-out $(SHENG_STOCK_PERF_DESTINATIONS), \
-     $(call find-copy-subdir-files,*,$(QCOM_COMMON_PATH)/vendor/perf/configs/common,$(TARGET_COPY_OUT_VENDOR)/etc) \
--    $(call find-copy-subdir-files,*,$(QCOM_COMMON_PATH)/vendor/perf/configs/$(TARGET_PERF_DIR),$(TARGET_COPY_OUT_VENDOR)/etc)
-+    $(call find-copy-subdir-files,*,$(QCOM_COMMON_PATH)/vendor/perf/configs/$(TARGET_PERF_DIR),$(TARGET_COPY_OUT_VENDOR)/etc))
- 
- # Disable the poweropt service for <5.4 platforms.
- ifneq (,$(filter 4.14 4.19, $(TARGET_KERNEL_VERSION)))
-@@ -34,10 +39,10 @@ endif
- 
- # Properties
- PRODUCT_VENDOR_PROPERTIES += \
--    ro.vendor.perf-hal.ver=3.0 \
-+    ro.vendor.perf-hal.ver=$(if $(filter aospa_sheng,$(TARGET_PRODUCT)),2.3,3.0) \
-     ro.vendor.extension_library=libqti-perfd-client.so \
-     ro.vendor.perf.scroll_opt=true \
--    ro.vendor.qspm.enable=true \
-+    ro.vendor.qspm.enable=false \
-     vendor.perf.framepacing.enable=1
- 
- ifeq (,$(filter 4.14, $(TARGET_KERNEL_VERSION)))
-@@ -53,4 +58,9 @@ PRODUCT_VENDOR_PROPERTIES += \
-     log.tag.vendor.qti.hardware.servicetrackeraidl-service=E
- 
- # Get non-open-source specific aspects
-+ifneq ($(TARGET_QTI_SKIP_COMMON_VENDOR_PREBUILTS),true)
- $(call inherit-product-if-exists, vendor/qcom/common/vendor/perf/perf-vendor.mk)
-+endif
-+
-+# AP engine is removed with its QSPM backend.
-+PRODUCT_COPY_FILES := $(filter-out %/QGPE.xml:$(TARGET_COPY_OUT_VENDOR)/etc/lm/QGPE.xml,$(PRODUCT_COPY_FILES))
-diff --git a/vendor/wlan/qti-wlan.mk b/vendor/wlan/qti-wlan.mk
-index f532b93f6e40d1f48269c6b8cb089b8aafac3e13..19c0081fdba2b4d86905b31e244dc2186c122cfc 100644
---- a/vendor/wlan/qti-wlan.mk
-+++ b/vendor/wlan/qti-wlan.mk
-@@ -79,4 +79,11 @@ else ifeq ($(QC_WIFI_HIDL_FEATURE_DUAL_AP),true)
- endif
- 
- # Get non-open-source specific aspects.
-+ifneq ($(TARGET_QTI_SKIP_COMMON_VENDOR_PREBUILTS),true)
- $(call inherit-product-if-exists, vendor/qcom/common/vendor/wlan/wlan-vendor.mk)
-+endif
-+
-+# Prebuilt kernels install their modules through BoardConfig, not source package targets.
-+ifeq ($(TARGET_KERNEL_DLKM_DISABLE),true)
-+PRODUCT_PACKAGES := $(filter-out %.ko,$(PRODUCT_PACKAGES))
-+endif

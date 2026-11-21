@@ -1,5 +1,5 @@
 diff --git a/hostapd/aidl/hostapd.cpp b/hostapd/aidl/hostapd.cpp
-index fd434124d840f7e5ab2a4b76e7d182475a4901fa..ef21b46af3a739a87f11f09a813cfb40259b1b32 100644
+index fd43412..ef21b46 100644
 --- a/hostapd/aidl/hostapd.cpp
 +++ b/hostapd/aidl/hostapd.cpp
 @@ -641,7 +641,7 @@ std::string CreateHostapdConfig(
@@ -12,7 +12,7 @@ index fd434124d840f7e5ab2a4b76e7d182475a4901fa..ef21b46af3a739a87f11f09a813cfb40
              }
  		}
 diff --git a/src/drivers/driver_nl80211.c b/src/drivers/driver_nl80211.c
-index 79fcc3abf76f3060c0e8fd0029e72cba6d0c2f5e..3859c94a10596d283c1ad86ab9e0980936820df5 100644
+index 79fcc3a..3859c94 100644
 --- a/src/drivers/driver_nl80211.c
 +++ b/src/drivers/driver_nl80211.c
 @@ -13820,6 +13820,14 @@ static int nl80211_qca_do_acs(struct i802_bss *bss,

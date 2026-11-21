@@ -1,5 +1,5 @@
 diff --git a/src/co/aospa/settings/lineage/health/ChargingControlPreferenceController.java b/src/co/aospa/settings/lineage/health/ChargingControlPreferenceController.java
-index 201df94b65671df8897edfd4c6325fa5f6cfd5ed..2087dadee87a0dee50121a4f4aed77b66213d436 100644
+index 201df94..2087dad 100644
 --- a/src/co/aospa/settings/lineage/health/ChargingControlPreferenceController.java
 +++ b/src/co/aospa/settings/lineage/health/ChargingControlPreferenceController.java
 @@ -1,53 +1,33 @@
@@ -90,7 +90,7 @@ index 201df94b65671df8897edfd4c6325fa5f6cfd5ed..2087dadee87a0dee50121a4f4aed77b6
 +    }
 +}
 diff --git a/src/co/aospa/settings/lineage/health/ChargingControlSettings.java b/src/co/aospa/settings/lineage/health/ChargingControlSettings.java
-index 0be0b5bf0109113f9434ea59baa14b28eff2bec8..f83692c61ba42743a9de59ec245d21efd9040ce4 100644
+index 0be0b5b..f83692c 100644
 --- a/src/co/aospa/settings/lineage/health/ChargingControlSettings.java
 +++ b/src/co/aospa/settings/lineage/health/ChargingControlSettings.java
 @@ -24,7 +24,7 @@ import java.util.List;
@@ -116,7 +116,7 @@ index 0be0b5bf0109113f9434ea59baa14b28eff2bec8..f83692c61ba42743a9de59ec245d21ef
  @SearchIndexable
  public class ChargingControlSettings extends SettingsPreferenceFragment implements
 diff --git a/src/co/aospa/settings/lineage/health/ChargingLimitPreference.java b/src/co/aospa/settings/lineage/health/ChargingLimitPreference.java
-index bab97cbda53f6d1cf08b3036aee03a95cb4f93cc..e0db94427eb788ddaa3d31d054414b937054c62b 100644
+index bab97cb..e0db944 100644
 --- a/src/co/aospa/settings/lineage/health/ChargingLimitPreference.java
 +++ b/src/co/aospa/settings/lineage/health/ChargingLimitPreference.java
 @@ -13,7 +13,7 @@ import android.widget.TextView;
@@ -129,7 +129,7 @@ index bab97cbda53f6d1cf08b3036aee03a95cb4f93cc..e0db94427eb788ddaa3d31d054414b93
  import com.android.settings.R;
  
 diff --git a/src/co/aospa/settings/lineage/health/ChargingSpeedPreferenceController.java b/src/co/aospa/settings/lineage/health/ChargingSpeedPreferenceController.java
-index b6dc11340d6d2b7ff3ba17a15e8cf87425a37ccd..a9b89ac59cfa535ac26e3ff47ff20580d34629c0 100644
+index b6dc113..a9b89ac 100644
 --- a/src/co/aospa/settings/lineage/health/ChargingSpeedPreferenceController.java
 +++ b/src/co/aospa/settings/lineage/health/ChargingSpeedPreferenceController.java
 @@ -22,7 +22,7 @@ import androidx.preference.ListPreference;
@@ -142,7 +142,7 @@ index b6dc11340d6d2b7ff3ba17a15e8cf87425a37ccd..a9b89ac59cfa535ac26e3ff47ff20580
  import com.android.settings.core.BasePreferenceController;
  
 diff --git a/src/co/aospa/settings/lineage/health/TimePreference.java b/src/co/aospa/settings/lineage/health/TimePreference.java
-index 13f06b64731ad84758590cb1013da45b4aa47782..b194550d8d8787304c2c7dd599489ac216bf08cc 100644
+index 13f06b6..b194550 100644
 --- a/src/co/aospa/settings/lineage/health/TimePreference.java
 +++ b/src/co/aospa/settings/lineage/health/TimePreference.java
 @@ -22,7 +22,7 @@ import com.android.settings.R;

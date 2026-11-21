@@ -1,5 +1,5 @@
 diff --git a/init/Android.bp b/init/Android.bp
-index 2783c9b643eba757fc0593e90107ce17c2d996c6..703542f342cfe18e6e4cc26f6856cd1b091e6851 100644
+index 2783c9b..703542f 100644
 --- a/init/Android.bp
 +++ b/init/Android.bp
 @@ -96,6 +96,7 @@ init_device_sources = [
@@ -23,7 +23,7 @@ index 2783c9b643eba757fc0593e90107ce17c2d996c6..703542f342cfe18e6e4cc26f6856cd1b
      proto: {
          type: "lite",
 diff --git a/init/property_service.cpp b/init/property_service.cpp
-index b70057f6f53f05dad7cca99113ffc4c2a64d0175..1b9a0fc1b077c378916d17c6d9a934f0f3a86f7d 100644
+index b70057f..1b9a0fc 100644
 --- a/init/property_service.cpp
 +++ b/init/property_service.cpp
 @@ -74,6 +74,7 @@
@@ -45,7 +45,7 @@ index b70057f6f53f05dad7cca99113ffc4c2a64d0175..1b9a0fc1b077c378916d17c6d9a934f0
      property_derive_build_fingerprint();
  
 diff --git a/libprocessgroup/processgroup.cpp b/libprocessgroup/processgroup.cpp
-index 7648c21095bd16241db6acf0cc7861432bdfeac5..2a8aef27ad4f5ed775ab955e835a05044b88369b 100644
+index 7648c21..2a8aef2 100644
 --- a/libprocessgroup/processgroup.cpp
 +++ b/libprocessgroup/processgroup.cpp
 @@ -213,6 +213,17 @@ bool SetTaskProfiles(pid_t tid, const std::vector<std::string>& profiles, bool u
@@ -66,8 +66,36 @@ index 7648c21095bd16241db6acf0cc7861432bdfeac5..2a8aef27ad4f5ed775ab955e835a0504
  bool SetTaskProfiles(pid_t tid, std::initializer_list<std::string_view> profiles,
                       bool use_fd_cache) {
      return TaskProfiles::GetInstance().SetTaskProfiles(
+diff --git a/rootdir/Android.bp b/rootdir/Android.bp
+index 27c4506..7312293 100644
+--- a/rootdir/Android.bp
++++ b/rootdir/Android.bp
+@@ -35,7 +35,10 @@ prebuilt_etc {
+ 
+ prebuilt_etc {
+     name: "init.rc",
+-    src: "init.rc",
++    src: select(soong_config_variable("aospa_build", "disable_serial_console"), {
++        true: ":aospa_init_without_serial_console",
++        default: "init.rc",
++    }),
+     sub_dir: "init/hw",
+     required: [
+         "platform-bootclasspath",
+@@ -273,3 +276,11 @@ filegroup {
+     srcs: ["ramdisk_node_list"],
+     export_to_make_var: "RAMDISK_NODE_LIST",
+ }
++
++// Generate the device console policy from the single common init template.
++genrule {
++    name: "aospa_init_without_serial_console",
++    srcs: ["init.rc"],
++    out: ["init.no-console.rc"],
++    cmd: "sed '/^on init && property:ro\\.debuggable=1$$/,+1d' $(in) > $(out)",
++}
 diff --git a/rootdir/init.rc b/rootdir/init.rc
-index d35afffcf47152b19f8d23f41196ca4b354212f2..a713b13b4598359d509596fac952c0b9842498b3 100644
+index d35afff..a713b13 100644
 --- a/rootdir/init.rc
 +++ b/rootdir/init.rc
 @@ -656,9 +656,9 @@ on late-fs

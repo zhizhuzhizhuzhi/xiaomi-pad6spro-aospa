@@ -1,5 +1,5 @@
 diff --git a/interfaces/health/Android.bp b/interfaces/health/Android.bp
-index e1609541c199d14dc71fd4f99c68a55a2e4f2dcf..0ee12f9f7fa243c44e677e19f530ca387e377525 100644
+index e160954..0ee12f9 100644
 --- a/interfaces/health/Android.bp
 +++ b/interfaces/health/Android.bp
 @@ -4,11 +4,11 @@
@@ -19,461 +19,20 @@ index e1609541c199d14dc71fd4f99c68a55a2e4f2dcf..0ee12f9f7fa243c44e677e19f530ca38
          cpp: {
 diff --git a/interfaces/health/aidl_api/vendor.lineage.health/1/.hash b/interfaces/health/aidl_api/vendor.lineage.health/1/.hash
 deleted file mode 100644
-index 79798d8763e48cace52ed93dc6931b5ec8de74dc..0000000000000000000000000000000000000000
+index 79798d8..0000000
 --- a/interfaces/health/aidl_api/vendor.lineage.health/1/.hash
 +++ /dev/null
 @@ -1 +0,0 @@
 -33fe8d162b07b2c4b66feccb70a5e45628e9e241
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/1/vendor/lineage/health/ChargingControlSupportedMode.aidl b/interfaces/health/aidl_api/vendor.lineage.health/1/vendor/lineage/health/ChargingControlSupportedMode.aidl
-deleted file mode 100644
-index b19e2cda96353d74bf7d982ece0ffeec715049a8..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/1/vendor/lineage/health/ChargingControlSupportedMode.aidl
-+++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- * Copyright (C) 2022-2023 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@Backing(type="int") @VintfStability
--enum ChargingControlSupportedMode {
--  TOGGLE = 1,
--  BYPASS = 2,
--  DEADLINE = 4,
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/1/vendor/lineage/health/IChargingControl.aidl b/interfaces/health/aidl_api/vendor.lineage.health/1/vendor/lineage/health/IChargingControl.aidl
-deleted file mode 100644
-index 4ea51abd1fd1c3e4eaeb9eea6c97db25a2a3fe53..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/1/vendor/lineage/health/IChargingControl.aidl
-+++ /dev/null
-@@ -1,31 +0,0 @@
--/*
-- * Copyright (C) 2022-2023 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@VintfStability
--interface IChargingControl {
--  boolean getChargingEnabled();
--  void setChargingEnabled(in boolean enabled);
--  void setChargingDeadline(in long deadline);
--  int getSupportedMode();
--}
 diff --git a/interfaces/health/aidl_api/vendor.lineage.health/2/.hash b/interfaces/health/aidl_api/vendor.lineage.health/2/.hash
 deleted file mode 100644
-index 028539996f0d584b26bd86bdd3d6b9d89d5dc068..0000000000000000000000000000000000000000
+index 0285399..0000000
 --- a/interfaces/health/aidl_api/vendor.lineage.health/2/.hash
 +++ /dev/null
 @@ -1 +0,0 @@
 -745393651c0a97dde18e89afa9d77409b4896bc2
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/ChargingControlSupportedMode.aidl b/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/ChargingControlSupportedMode.aidl
-deleted file mode 100644
-index 3d7dfe2289769233041e63115699e0fa00f70735..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/ChargingControlSupportedMode.aidl
-+++ /dev/null
-@@ -1,31 +0,0 @@
--/*
-- * Copyright (C) 2022-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@Backing(type="int") @VintfStability
--enum ChargingControlSupportedMode {
--  TOGGLE = (1 << 0) /* 1 */,
--  BYPASS = (1 << 1) /* 2 */,
--  DEADLINE = (1 << 2) /* 4 */,
--  LIMIT = (1 << 3) /* 8 */,
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/ChargingLimitInfo.aidl b/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/ChargingLimitInfo.aidl
-deleted file mode 100644
-index 63d9568235b84653b817947d76019d0b6f40a6ec..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/ChargingLimitInfo.aidl
-+++ /dev/null
-@@ -1,29 +0,0 @@
--/*
-- * Copyright (C) 2023-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@JavaDerive(toString=true) @VintfStability
--parcelable ChargingLimitInfo {
--  int max;
--  int min;
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/FastChargeMode.aidl b/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/FastChargeMode.aidl
-deleted file mode 100644
-index 89fdbd593d7ed564cab67531f8ce440cac7574be..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/FastChargeMode.aidl
-+++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- * Copyright (C) 2023-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@Backing(type="int") @VintfStability
--enum FastChargeMode {
--  NONE = (1 << 0) /* 1 */,
--  FAST_CHARGE = (1 << 1) /* 2 */,
--  SUPER_FAST_CHARGE = (1 << 2) /* 4 */,
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/IChargingControl.aidl b/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/IChargingControl.aidl
-deleted file mode 100644
-index 3c124a32f129138a9e08fe8abe7bde1ec3565da2..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/IChargingControl.aidl
-+++ /dev/null
-@@ -1,34 +0,0 @@
--/*
-- * Copyright (C) 2022-2023 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@VintfStability
--interface IChargingControl {
--  boolean getChargingEnabled();
--  void setChargingEnabled(in boolean enabled);
--  void setChargingDeadline(in long deadline);
--  int getSupportedMode();
--  long getChargingDeadline();
--  vendor.lineage.health.ChargingLimitInfo getChargingLimit();
--  void setChargingLimit(in vendor.lineage.health.ChargingLimitInfo limit);
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/IFastCharge.aidl b/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/IFastCharge.aidl
-deleted file mode 100644
-index 72d797708d4eb9bb79c81f018636ff9a0ed3857f..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/2/vendor/lineage/health/IFastCharge.aidl
-+++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- * Copyright (C) 2023-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@VintfStability
--interface IFastCharge {
--  long getSupportedFastChargeModes();
--  vendor.lineage.health.FastChargeMode getFastChargeMode();
--  vendor.lineage.health.FastChargeMode setFastChargeMode(vendor.lineage.health.FastChargeMode mode);
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/ChargingControlSupportedMode.aidl b/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/ChargingControlSupportedMode.aidl
-deleted file mode 100644
-index 3d7dfe2289769233041e63115699e0fa00f70735..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/ChargingControlSupportedMode.aidl
-+++ /dev/null
-@@ -1,31 +0,0 @@
--/*
-- * Copyright (C) 2022-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@Backing(type="int") @VintfStability
--enum ChargingControlSupportedMode {
--  TOGGLE = (1 << 0) /* 1 */,
--  BYPASS = (1 << 1) /* 2 */,
--  DEADLINE = (1 << 2) /* 4 */,
--  LIMIT = (1 << 3) /* 8 */,
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/ChargingLimitInfo.aidl b/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/ChargingLimitInfo.aidl
-deleted file mode 100644
-index 63d9568235b84653b817947d76019d0b6f40a6ec..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/ChargingLimitInfo.aidl
-+++ /dev/null
-@@ -1,29 +0,0 @@
--/*
-- * Copyright (C) 2023-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@JavaDerive(toString=true) @VintfStability
--parcelable ChargingLimitInfo {
--  int max;
--  int min;
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/FastChargeMode.aidl b/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/FastChargeMode.aidl
-deleted file mode 100644
-index 89fdbd593d7ed564cab67531f8ce440cac7574be..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/FastChargeMode.aidl
-+++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- * Copyright (C) 2023-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@Backing(type="int") @VintfStability
--enum FastChargeMode {
--  NONE = (1 << 0) /* 1 */,
--  FAST_CHARGE = (1 << 1) /* 2 */,
--  SUPER_FAST_CHARGE = (1 << 2) /* 4 */,
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/IChargingControl.aidl b/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/IChargingControl.aidl
-deleted file mode 100644
-index 3c124a32f129138a9e08fe8abe7bde1ec3565da2..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/IChargingControl.aidl
-+++ /dev/null
-@@ -1,34 +0,0 @@
--/*
-- * Copyright (C) 2022-2023 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@VintfStability
--interface IChargingControl {
--  boolean getChargingEnabled();
--  void setChargingEnabled(in boolean enabled);
--  void setChargingDeadline(in long deadline);
--  int getSupportedMode();
--  long getChargingDeadline();
--  vendor.lineage.health.ChargingLimitInfo getChargingLimit();
--  void setChargingLimit(in vendor.lineage.health.ChargingLimitInfo limit);
--}
-diff --git a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/IFastCharge.aidl b/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/IFastCharge.aidl
-deleted file mode 100644
-index 72d797708d4eb9bb79c81f018636ff9a0ed3857f..0000000000000000000000000000000000000000
---- a/interfaces/health/aidl_api/vendor.lineage.health/current/vendor/lineage/health/IFastCharge.aidl
-+++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- * Copyright (C) 2023-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
--///////////////////////////////////////////////////////////////////////////////
--// THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
--///////////////////////////////////////////////////////////////////////////////
--
--// This file is a snapshot of an AIDL file. Do not edit it manually. There are
--// two cases:
--// 1). this is a frozen version file - do not edit this in any case.
--// 2). this is a 'current' file. If you make a backwards compatible change to
--//     the interface (from the latest frozen version), the build system will
--//     prompt you to update this file with `m <name>-update-api`.
--//
--// You must not make a backward incompatible change to any AIDL file built
--// with the aidl_interface module type with versions property set. The module
--// type is used to build AIDL files in a way that they can be used across
--// independently updatable components of the system. If a device is shipped
--// with such a backward incompatible change, it has a high risk of breaking
--// later when a module using the interface is updated, e.g., Mainline modules.
--
--package vendor.lineage.health;
--@VintfStability
--interface IFastCharge {
--  long getSupportedFastChargeModes();
--  vendor.lineage.health.FastChargeMode getFastChargeMode();
--  vendor.lineage.health.FastChargeMode setFastChargeMode(vendor.lineage.health.FastChargeMode mode);
--}
 diff --git a/interfaces/health/default/Android.bp b/interfaces/health/default/Android.bp
-index b50f2aba3e5759eaa51c9927860f372375e8373c..df5e686d7605f25028c1f255dcd02e34c1d03b28 100644
+index b50f2ab..df5e686 100644
 --- a/interfaces/health/default/Android.bp
 +++ b/interfaces/health/default/Android.bp
 @@ -5,55 +5,55 @@
@@ -558,7 +117,7 @@ index b50f2aba3e5759eaa51c9927860f372375e8373c..df5e686d7605f25028c1f255dcd02e34
      ],
  }
 diff --git a/interfaces/health/default/ChargingControl.cpp b/interfaces/health/default/ChargingControl.cpp
-index 9bcca91e7a091e5089f7f12ac5785f30586e5f1e..2d13bd9c9e7eb618ca87437a65963e13c0c56f32 100644
+index 9bcca91..9fd5188 100644
 --- a/interfaces/health/default/ChargingControl.cpp
 +++ b/interfaces/health/default/ChargingControl.cpp
 @@ -11,11 +11,11 @@
@@ -575,7 +134,23 @@ index 9bcca91e7a091e5089f7f12ac5785f30586e5f1e..2d13bd9c9e7eb618ca87437a65963e13
  namespace health {
  
  #ifdef HEALTH_CHARGING_CONTROL_SUPPORTS_TOGGLE
-@@ -308,6 +308,6 @@ binder_status_t ChargingControl::dump(int fd, const char** /* args */, uint32_t
+@@ -288,9 +288,13 @@ binder_status_t ChargingControl::dump(int fd, const char** /* args */, uint32_t
+ 
+ #ifdef HEALTH_CHARGING_CONTROL_SUPPORTS_TOGGLE
+     bool isChargingEnabled;
+-    getChargingEnabled(&isChargingEnabled);
++    const auto status = getChargingEnabled(&isChargingEnabled);
+     dprintf(fd, "Charging control node selected: %s\n", mChargingEnabledNode->path.c_str());
+-    dprintf(fd, "Charging enabled: %s\n", isChargingEnabled ? "true" : "false");
++    if (status.isOk()) {
++        dprintf(fd, "Charging enabled: %s\n", isChargingEnabled ? "true" : "false");
++    } else {
++        dprintf(fd, "Charging enabled read failed: %s\n", status.getDescription().c_str());
++    }
+ #endif
+ 
+ #ifdef HEALTH_CHARGING_CONTROL_SUPPORTS_DEADLINE
+@@ -308,6 +312,6 @@ binder_status_t ChargingControl::dump(int fd, const char** /* args */, uint32_t
  }
  
  }  // namespace health
@@ -584,7 +159,7 @@ index 9bcca91e7a091e5089f7f12ac5785f30586e5f1e..2d13bd9c9e7eb618ca87437a65963e13
  }  // namespace vendor
  }  // namespace aidl
 diff --git a/interfaces/health/default/ChargingControl.h b/interfaces/health/default/ChargingControl.h
-index ca2dabf72781a6b60e893cf7671c363e2f2d3624..0752ff117daefdbfbef3fb57d1f608ec3458799b 100644
+index ca2dabf..0752ff1 100644
 --- a/interfaces/health/default/ChargingControl.h
 +++ b/interfaces/health/default/ChargingControl.h
 @@ -6,16 +6,16 @@
@@ -617,7 +192,7 @@ index ca2dabf72781a6b60e893cf7671c363e2f2d3624..0752ff117daefdbfbef3fb57d1f608ec
  }  // namespace vendor
  }  // namespace aidl
 diff --git a/interfaces/health/default/FastCharge.cpp b/interfaces/health/default/FastCharge.cpp
-index 7b97f7a5392ca751d2eeab24e9c8f853858de52d..4d5704428bd15900329e9138821bfde853f7499f 100644
+index 7b97f7a..9a1ac92 100644
 --- a/interfaces/health/default/FastCharge.cpp
 +++ b/interfaces/health/default/FastCharge.cpp
 @@ -11,11 +11,11 @@
@@ -634,7 +209,22 @@ index 7b97f7a5392ca751d2eeab24e9c8f853858de52d..4d5704428bd15900329e9138821bfde8
  namespace health {
  
  ndk::ScopedAStatus FastCharge::getSupportedFastChargeModes(int64_t* _aidl_return) {
-@@ -78,6 +78,6 @@ binder_status_t FastCharge::dump(int fd, const char** args, uint32_t numArgs) {
+@@ -69,15 +69,19 @@ binder_status_t FastCharge::dump(int fd, const char** args, uint32_t numArgs) {
+     getSupportedFastChargeModes(&supportedFastChargeModes);
+ 
+     FastChargeMode fastChargeMode;
+-    getFastChargeMode(&fastChargeMode);
++    const auto status = getFastChargeMode(&fastChargeMode);
+ 
+     dprintf(fd, "Fast charge supported modes: %ld\n", supportedFastChargeModes);
+-    dprintf(fd, "Fast charge mode: %d\n", fastChargeMode);
++    if (status.isOk()) {
++        dprintf(fd, "Fast charge mode: %d\n", fastChargeMode);
++    } else {
++        dprintf(fd, "Fast charge mode read failed: %s\n", status.getDescription().c_str());
++    }
+ 
+     return STATUS_OK;
  }
  
  }  // namespace health
@@ -643,7 +233,7 @@ index 7b97f7a5392ca751d2eeab24e9c8f853858de52d..4d5704428bd15900329e9138821bfde8
  }  // namespace vendor
  }  // namespace aidl
 diff --git a/interfaces/health/default/FastCharge.h b/interfaces/health/default/FastCharge.h
-index de8bf7bd2facf6837b30e0dc00d5ff8fc06578c4..2513495ea2777c994ba7335d2b280df2d79d909c 100644
+index de8bf7b..2513495 100644
 --- a/interfaces/health/default/FastCharge.h
 +++ b/interfaces/health/default/FastCharge.h
 @@ -6,11 +6,11 @@
@@ -669,7 +259,7 @@ index de8bf7bd2facf6837b30e0dc00d5ff8fc06578c4..2513495ea2777c994ba7335d2b280df2
  }  // namespace vendor
  }  // namespace aidl
 diff --git a/interfaces/health/default/service.cpp b/interfaces/health/default/service.cpp
-index a3df8f7607b2137c23be3b7e3acfa3770d4bedda..6684b2cf4297f3700754aa83a4e53eba5cef07fe 100644
+index a3df8f7..6684b2c 100644
 --- a/interfaces/health/default/service.cpp
 +++ b/interfaces/health/default/service.cpp
 @@ -11,8 +11,8 @@
@@ -685,7 +275,7 @@ index a3df8f7607b2137c23be3b7e3acfa3770d4bedda..6684b2cf4297f3700754aa83a4e53eba
      ABinderProcess_setThreadPoolMaxThreadCount(0);
 diff --git a/interfaces/health/default/vendor.lineage.health-service.default.rc b/interfaces/health/default/vendor.lineage.health-service.default.rc
 deleted file mode 100644
-index 77bd83f3b50ca543de1aced49de4bb308a6c9c21..0000000000000000000000000000000000000000
+index 77bd83f..0000000
 --- a/interfaces/health/default/vendor.lineage.health-service.default.rc
 +++ /dev/null
 @@ -1,4 +0,0 @@
@@ -693,249 +283,368 @@ index 77bd83f3b50ca543de1aced49de4bb308a6c9c21..00000000000000000000000000000000
 -    class hal
 -    user system
 -    group system
-diff --git a/interfaces/health/default/vendor.lineage.health-service.default.xml b/interfaces/health/default/vendor.lineage.health-service.default.xml
+diff --git a/interfaces/qcom/capabilityconfigstore b/interfaces/qcom/capabilityconfigstore
+new file mode 120000
+index 0000000..bffdca9
+--- /dev/null
++++ b/interfaces/qcom/capabilityconfigstore
+@@ -0,0 +1 @@
++../../../qcom/opensource/interfaces/capabilityconfigstore
+\ No newline at end of file
+diff --git a/interfaces/qcom/capabilityconfigstore/1.0/Android.bp b/interfaces/qcom/capabilityconfigstore/1.0/Android.bp
 deleted file mode 100644
-index 148385b132cc3da67f8b110d99ce14dd64f3e6d0..0000000000000000000000000000000000000000
---- a/interfaces/health/default/vendor.lineage.health-service.default.xml
+index a2ba8cd..0000000
+--- a/interfaces/qcom/capabilityconfigstore/1.0/Android.bp
++++ /dev/null
+@@ -1,15 +0,0 @@
+-// This file is autogenerated by hidl-gen -Landroidbp.
+-
+-hidl_interface {
+-    name: "vendor.qti.hardware.capabilityconfigstore@1.0",
+-    root: "vendor.qti.hardware",
+-    system_ext_specific: true,
+-    srcs: [
+-        "types.hal",
+-        "ICapabilityConfigStore.hal",
+-    ],
+-    interfaces: [
+-        "android.hidl.base@1.0",
+-    ],
+-    gen_java: true,
+-}
+diff --git a/interfaces/qcom/capabilityconfigstore/1.0/ICapabilityConfigStore.hal b/interfaces/qcom/capabilityconfigstore/1.0/ICapabilityConfigStore.hal
+deleted file mode 100644
+index d0629ea..0000000
+--- a/interfaces/qcom/capabilityconfigstore/1.0/ICapabilityConfigStore.hal
 +++ /dev/null
 @@ -1,8 +0,0 @@
--<manifest version="1.0" type="device">
--    <hal format="aidl">
--        <name>vendor.lineage.health</name>
--        <version>2</version>
--        <fqname>IChargingControl/default</fqname>
--        <fqname>IFastCharge/default</fqname>
--    </hal>
--</manifest>
-diff --git a/interfaces/health/vendor/lineage/health/ChargingControlSupportedMode.aidl b/interfaces/health/vendor/lineage/health/ChargingControlSupportedMode.aidl
+-package vendor.qti.hardware.capabilityconfigstore@1.0;
+-
+-import CommandResult;
+-import Result;
+-
+-interface ICapabilityConfigStore {
+-    getConfig(string area, string key) generates (CommandResult result);
+-};
+diff --git a/interfaces/qcom/capabilityconfigstore/1.0/types.hal b/interfaces/qcom/capabilityconfigstore/1.0/types.hal
 deleted file mode 100644
-index 0b8b56fc4374b2c0dc332e9e511cd4f2c6e7ea52..0000000000000000000000000000000000000000
---- a/interfaces/health/vendor/lineage/health/ChargingControlSupportedMode.aidl
+index cbcc20f..0000000
+--- a/interfaces/qcom/capabilityconfigstore/1.0/types.hal
 +++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- * Copyright (C) 2022-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
+@@ -1,11 +0,0 @@
+-package vendor.qti.hardware.capabilityconfigstore@1.0;
 -
--package vendor.lineage.health;
+-struct CommandResult {
+-    Result result_type;
+-    string value;
+-};
 -
--@Backing(type="int") @VintfStability
--enum ChargingControlSupportedMode {
--    /**
--     * The device supports control charging through an on/off toggle.
--     */
--    TOGGLE = 1 << 0,
--
--    /**
--     * The device allows battery bypass when charging stops.
--     */
--    BYPASS = 1 << 1,
--
--    /**
--     * The device supports control charging by specifying the deadline
--     */
--    DEADLINE = 1 << 2,
--
--    /**
--     * The device supports control charging by specifying the limit
--     */
--    LIMIT = 1 << 3,
--}
-diff --git a/interfaces/health/vendor/lineage/health/ChargingLimitInfo.aidl b/interfaces/health/vendor/lineage/health/ChargingLimitInfo.aidl
+-enum Result : int32_t {
+-    SUCCESS = 0,
+-    NOT_FOUND = -1
+-};
+diff --git a/interfaces/qcom/perf b/interfaces/qcom/perf
+new file mode 120000
+index 0000000..efac86f
+--- /dev/null
++++ b/interfaces/qcom/perf
+@@ -0,0 +1 @@
++../../../qcom/opensource/interfaces/perf
+\ No newline at end of file
+diff --git a/interfaces/qcom/perf/1.0/Android.bp b/interfaces/qcom/perf/1.0/Android.bp
 deleted file mode 100644
-index d40c34d0ceff1d0ee09261962c6a06e87e1617a4..0000000000000000000000000000000000000000
---- a/interfaces/health/vendor/lineage/health/ChargingLimitInfo.aidl
+index 7b62e3b..0000000
+--- a/interfaces/qcom/perf/1.0/Android.bp
 +++ /dev/null
-@@ -1,13 +0,0 @@
--/*
-- * Copyright (C) 2023-2025 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
+@@ -1,14 +0,0 @@
+-// This file is autogenerated by hidl-gen -Landroidbp.
 -
--package vendor.lineage.health;
--
--@JavaDerive(toString=true) @VintfStability
--parcelable ChargingLimitInfo {
--    int max;
--    int min;
+-hidl_interface {
+-    name: "vendor.qti.hardware.perf@1.0",
+-    root: "vendor.qti.hardware",
+-    system_ext_specific: true,
+-    srcs: [
+-        "IPerf.hal",
+-    ],
+-    interfaces: [
+-        "android.hidl.base@1.0",
+-    ],
+-    gen_java: true,
 -}
-diff --git a/interfaces/health/vendor/lineage/health/FastChargeMode.aidl b/interfaces/health/vendor/lineage/health/FastChargeMode.aidl
+diff --git a/interfaces/qcom/perf/1.0/IPerf.hal b/interfaces/qcom/perf/1.0/IPerf.hal
 deleted file mode 100644
-index 80bb7263b8550fa9573890e3414f70b7f49455f1..0000000000000000000000000000000000000000
---- a/interfaces/health/vendor/lineage/health/FastChargeMode.aidl
+index 0e7b530..0000000
+--- a/interfaces/qcom/perf/1.0/IPerf.hal
 +++ /dev/null
 @@ -1,25 +0,0 @@
 -/*
-- * Copyright (C) 2023-2025 The LineageOS Project
+- * Copyright (C) 2021 The LineageOS Project
 - *
-- * SPDX-License-Identifier: Apache-2.0
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *      http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
 - */
 -
--package vendor.lineage.health;
+-package vendor.qti.hardware.perf@1.0;
 -
--@Backing(type="int") @VintfStability
--enum FastChargeMode {
--    /**
--     * The device supports no fast charging.
--     */
--    NONE = 1 << 0,
--
--    /**
--     * The device supports fast charging.
--     */
--    FAST_CHARGE = 1 << 1,
--
--    /**
--     * The device supports super fast charging.
--     */
--    SUPER_FAST_CHARGE = 1 << 2,
--}
-diff --git a/interfaces/health/vendor/lineage/health/IChargingControl.aidl b/interfaces/health/vendor/lineage/health/IChargingControl.aidl
+-interface IPerf {
+-    perfLockAcquire(int32_t pl_handle, uint32_t duration, vec<int32_t> boostsList, int32_t reserved) generates (int32_t ret);
+-    perfLockRelease(int32_t pl_handle, int32_t reserved);
+-    perfHint(uint32_t hint, string userDataStr, int32_t userData1, int32_t userData2, int32_t reserved) generates (int32_t ret);
+-    perfProfile(int32_t pl_handle, int32_t profile, int32_t reserved) generates (int32_t ret);
+-    perfLockCmd(int32_t cmd, int32_t reserved);
+-};
+diff --git a/interfaces/qcom/perf/2.0/Android.bp b/interfaces/qcom/perf/2.0/Android.bp
 deleted file mode 100644
-index 669a3de6f3c33bfd1fbbd0552b27a8402b378e9d..0000000000000000000000000000000000000000
---- a/interfaces/health/vendor/lineage/health/IChargingControl.aidl
+index 7a686fc..0000000
+--- a/interfaces/qcom/perf/2.0/Android.bp
 +++ /dev/null
-@@ -1,87 +0,0 @@
--/*
-- * Copyright (C) 2022-2023 The LineageOS Project
-- *
-- * SPDX-License-Identifier: Apache-2.0
-- */
+@@ -1,14 +0,0 @@
+-// This file is autogenerated by hidl-gen -Landroidbp.
 -
--package vendor.lineage.health;
--
--import vendor.lineage.health.ChargingLimitInfo;
--
--@VintfStability
--interface IChargingControl {
--    /**
--     * Get battery charging enablement status.
--     * Note that this only returns whether charging should be enabled or not when a charger
--     * is plugged, not if the battery is actually charging.
--     *
--     * @return whether if battery charging is enabled.
--     *         If error:
--     *         - Return exception with code EX_ILLEGAL_STATE
--     *           if the value can't be determined from the driver.
--     *         - Return service specific error with code STATUS_UNKNOWN
--     *           for other errors.
--     */
--    boolean getChargingEnabled();
--
--    /**
--     * Set battery charging enabled.
--     *
--     * @return nothing if successful.
--     *         If error:
--     *         - Return service specific error with code STATUS_UNKNOWN
--     *           for other errors.
--     */
--    void setChargingEnabled(in boolean enabled);
--
--    /**
--     * Sets the charging control deadline, if deadline mode is supported.
--     *
--     * @return nothing if successful.
--     *         If error:
--     *         - Return service specific error with code STATUS_UNKNOWN
--     *            for other errors.
--     */
--    void setChargingDeadline(in long deadline);
--
--    /**
--     * Get the device's supported charging control mode.
--     *
--     * @return a bitmask of ChargingControlSupportedMode.
--     */
--    int getSupportedMode();
--
--    /**
--     * Get the charging control deadline, if deadline mode is supported.
--     *
--     * @return the deadline in seconds.
--     *         If error:
--     *         - Return exception with code EX_ILLEGAL_STATE
--     *           if the value can't be determined from the driver.
--     *         - Return service specific error with code STATUS_UNKNOWN
--     *           for other errors.
--     */
--    long getChargingDeadline();
--
--    /**
--     * Get the charging control limit, if limit mode is supported.
--     *
--     * @return the charging control limit.
--     *         If error:
--     *         - Return exception with code EX_ILLEGAL_STATE
--     *           if the value can't be determined from the driver.
--     *         - Return service specific error with code STATUS_UNKNOWN
--     *           for other errors.
--     */
--    ChargingLimitInfo getChargingLimit();
--
--    /**
--     * Set the charging control limit, if limit mode is supported.
--     *
--     * @return nothing if successful.
--     *        If error:
--     *        - Return service specific error with code STATUS_UNKNOWN
--     *          for other errors.
--     */
--    void setChargingLimit(in ChargingLimitInfo limit);
+-hidl_interface {
+-    name: "vendor.qti.hardware.perf@2.0",
+-    root: "vendor.qti.hardware",
+-    system_ext_specific: true,
+-    srcs: [
+-        "IPerf.hal",
+-    ],
+-    interfaces: [
+-        "android.hidl.base@1.0",
+-    ],
+-    gen_java: true,
 -}
-diff --git a/interfaces/health/vendor/lineage/health/IFastCharge.aidl b/interfaces/health/vendor/lineage/health/IFastCharge.aidl
+diff --git a/interfaces/qcom/perf/2.0/IPerf.hal b/interfaces/qcom/perf/2.0/IPerf.hal
 deleted file mode 100644
-index 662923162fd5023f1308a6f8449342ea33ab49e6..0000000000000000000000000000000000000000
---- a/interfaces/health/vendor/lineage/health/IFastCharge.aidl
+index 1faf0cd..0000000
+--- a/interfaces/qcom/perf/2.0/IPerf.hal
 +++ /dev/null
-@@ -1,42 +0,0 @@
+@@ -1,29 +0,0 @@
 -/*
-- * Copyright (C) 2023-2025 The LineageOS Project
+- * Copyright (C) 2021 The LineageOS Project
 - *
-- * SPDX-License-Identifier: Apache-2.0
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *      http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
 - */
 -
--package vendor.lineage.health;
+-package vendor.qti.hardware.perf@2.0;
 -
--import vendor.lineage.health.FastChargeMode;
+-interface IPerf {
+-    perfLockAcquire(int32_t pl_handle, uint32_t duration, vec<int32_t> boostsList, vec<int32_t> reserved) generates (int32_t ret);
+-    perfLockRelease(int32_t pl_handle, vec<int32_t> reserved);
+-    perfHint(uint32_t hint, string userDataStr, int32_t userData1, int32_t userData2, vec<int32_t> reserved) generates (int32_t ret);
+-    perfProfile(int32_t pl_handle, int32_t profile, int32_t reserved) generates (int32_t ret);
+-    perfLockCmd(int32_t cmd, int32_t reserved);
+-    perfGetProp(string propName, string defaultVal) generates (string ret);
+-    perfSetProp(string propName, string value) generates (int32_t ret);
+-    perfAsyncRequest(int32_t cmd, string userDataStr, vec<int32_t> params) generates (int32_t ret);
+-    perfSyncRequest(int32_t cmd, string userDataStr, vec<int32_t> params) generates (string ret);
+-};
+diff --git a/interfaces/qcom/perf/2.1/Android.bp b/interfaces/qcom/perf/2.1/Android.bp
+deleted file mode 100644
+index f963020..0000000
+--- a/interfaces/qcom/perf/2.1/Android.bp
++++ /dev/null
+@@ -1,16 +0,0 @@
+-// This file is autogenerated by hidl-gen -Landroidbp.
 -
--@VintfStability
--interface IFastCharge {
--    /**
--     * Get supported fast charging modes.
--     *
--     * @return A bitmap of supported fast charging modes, specified by {@link FastChargeMode}
--     *         If error:
--     *         - Return service specific error with code STATUS_UNKNOWN
--     */
--    long getSupportedFastChargeModes();
--
--    /**
--     * Get the fast charging mode.
--     *
--     * @return Current fast charging mode, specified by {@link FastChargeMode}
--     *         If error:
--     *         - Return service specific error with code STATUS_UNKNOWN
--     */
--    FastChargeMode getFastChargeMode();
--
--    /**
--     * Set the fast charging mode.
--     *
--     * @return Current fast charging mode, specified by {@link FastChargeMode}
--     *         If error:
--     *         - Return exception with code EX_ILLEGAL_STATE
--     *           if the value can't be determined from the driver.
--     *         - Return service specific error with code STATUS_UNKNOWN
--     *           for other errors.
--     */
--    FastChargeMode setFastChargeMode(FastChargeMode mode);
+-hidl_interface {
+-    name: "vendor.qti.hardware.perf@2.1",
+-    root: "vendor.qti.hardware",
+-    system_ext_specific: true,
+-    srcs: [
+-        "IPerf.hal",
+-        "IPerfCallback.hal",
+-    ],
+-    interfaces: [
+-        "android.hidl.base@1.0",
+-        "vendor.qti.hardware.perf@2.0",
+-    ],
+-    gen_java: true,
 -}
+diff --git a/interfaces/qcom/perf/2.1/IPerf.hal b/interfaces/qcom/perf/2.1/IPerf.hal
+deleted file mode 100644
+index 7275334..0000000
+--- a/interfaces/qcom/perf/2.1/IPerf.hal
++++ /dev/null
+@@ -1,25 +0,0 @@
+-/*
+- * Copyright (C) 2021 The LineageOS Project
+- *
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *      http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package vendor.qti.hardware.perf@2.1;
+-
+-import @2.0::IPerf;
+-import IPerfCallback;
+-
+-interface IPerf extends @2.0::IPerf {
+-    perfCallbackRegister(IPerfCallback callback, int32_t clientId) generates (int32_t ret);
+-    perfCallbackDeregister(IPerfCallback callback, int32_t clientId) generates (int32_t ret);
+-};
+diff --git a/interfaces/qcom/perf/2.1/IPerfCallback.hal b/interfaces/qcom/perf/2.1/IPerfCallback.hal
+deleted file mode 100644
+index e7bf260..0000000
+--- a/interfaces/qcom/perf/2.1/IPerfCallback.hal
++++ /dev/null
+@@ -1,21 +0,0 @@
+-/*
+- * Copyright (C) 2021 The LineageOS Project
+- *
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *      http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package vendor.qti.hardware.perf@2.1;
+-
+-interface IPerfCallback {
+-    oneway notifyCallback (uint32_t hint, string userDataStr, int32_t userData1, int32_t userData2, vec<int32_t> reserved);
+-};
+diff --git a/interfaces/qcom/perf/2.2/Android.bp b/interfaces/qcom/perf/2.2/Android.bp
+deleted file mode 100644
+index a4a89c3..0000000
+--- a/interfaces/qcom/perf/2.2/Android.bp
++++ /dev/null
+@@ -1,16 +0,0 @@
+-// This file is autogenerated by hidl-gen -Landroidbp.
+-
+-hidl_interface {
+-    name: "vendor.qti.hardware.perf@2.2",
+-    root: "vendor.qti.hardware",
+-    system_ext_specific: true,
+-    srcs: [
+-        "IPerf.hal",
+-    ],
+-    interfaces: [
+-        "android.hidl.base@1.0",
+-        "vendor.qti.hardware.perf@2.0",
+-        "vendor.qti.hardware.perf@2.1",
+-    ],
+-    gen_java: true,
+-}
+diff --git a/interfaces/qcom/perf/2.2/IPerf.hal b/interfaces/qcom/perf/2.2/IPerf.hal
+deleted file mode 100644
+index bd648ff..0000000
+--- a/interfaces/qcom/perf/2.2/IPerf.hal
++++ /dev/null
+@@ -1,25 +0,0 @@
+-/*
+- * Copyright (C) 2021 The LineageOS Project
+- *
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *      http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package vendor.qti.hardware.perf@2.2;
+-
+-import @2.1::IPerf;
+-
+-interface IPerf extends @2.1::IPerf {
+-    perfLockAcqAndRelease(int32_t pl_handle, uint32_t duration, vec<int32_t> boostsList, vec<int32_t> reserved) generates (int32_t ret);
+-    oneway perfEvent(uint32_t eventId, string userDataStr, vec<int32_t> reserved);
+-    perfGetFeedback(uint32_t featureId, string userDataStr, vec<int32_t> reserved) generates (int32_t ret);
+-};
+diff --git a/interfaces/qcom/perf/2.3/Android.bp b/interfaces/qcom/perf/2.3/Android.bp
+deleted file mode 100644
+index cb58877..0000000
+--- a/interfaces/qcom/perf/2.3/Android.bp
++++ /dev/null
+@@ -1,17 +0,0 @@
+-// This file is autogenerated by hidl-gen -Landroidbp.
+-
+-hidl_interface {
+-    name: "vendor.qti.hardware.perf@2.3",
+-    root: "vendor.qti.hardware",
+-    system_ext_specific: true,
+-    srcs: [
+-        "IPerf.hal",
+-    ],
+-    interfaces: [
+-        "android.hidl.base@1.0",
+-        "vendor.qti.hardware.perf@2.0",
+-        "vendor.qti.hardware.perf@2.1",
+-        "vendor.qti.hardware.perf@2.2",
+-    ],
+-    gen_java: true,
+-}
+diff --git a/interfaces/qcom/perf/2.3/IPerf.hal b/interfaces/qcom/perf/2.3/IPerf.hal
+deleted file mode 100644
+index 51f4191..0000000
+--- a/interfaces/qcom/perf/2.3/IPerf.hal
++++ /dev/null
+@@ -1,24 +0,0 @@
+-/*
+- * Copyright (C) 2022 The LineageOS Project
+- *
+- * Licensed under the Apache License, Version 2.0 (the "License");
+- * you may not use this file except in compliance with the License.
+- * You may obtain a copy of the License at
+- *
+- *      http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package vendor.qti.hardware.perf@2.3;
+-
+-import @2.2::IPerf;
+-
+-interface IPerf extends @2.2::IPerf {
+-    perfHintAcqRel(int32_t pl_handle, uint32_t hint, string pkg_name, int32_t duration, int32_t hint_type, vec<int32_t> reserved) generates (int32_t ret);
+-    perfHintRenew(int32_t pl_handle, uint32_t hint, string pkg_name, int32_t duration, int32_t hint_type, vec<int32_t> reserved) generates (int32_t ret);
+-};
 diff --git a/overlay/AOSPAFrameworksOverlay/res/values/config.xml b/overlay/AOSPAFrameworksOverlay/res/values/config.xml
-index b4d745be31f00edcadc03d52756cb7a662d934f2..f4d0a3f4533bc81d611a04459a352e258e8520ae 100644
+index b4d745b..f4d0a3f 100644
 --- a/overlay/AOSPAFrameworksOverlay/res/values/config.xml
 +++ b/overlay/AOSPAFrameworksOverlay/res/values/config.xml
 @@ -18,8 +18,6 @@
@@ -948,7 +657,7 @@ index b4d745be31f00edcadc03d52756cb7a662d934f2..f4d0a3f4533bc81d611a04459a352e25
          <item>"/vendor/lib64/egl/libGLESv2_adreno.so"</item>
          <item>"/vendor/lib64/libCB.so"</item>
 diff --git a/products/fuxi/aospa_fuxi.mk b/products/fuxi/aospa_fuxi.mk
-index 29f7e67c2faa54b9860aafa8f24685026712ca60..6b2190e2f56bb328dfc3e2e54099b17e88da52ae 100644
+index 29f7e67..6b2190e 100644
 --- a/products/fuxi/aospa_fuxi.mk
 +++ b/products/fuxi/aospa_fuxi.mk
 @@ -22,7 +22,7 @@ PRODUCT_MODEL := fuxi
@@ -961,7 +670,7 @@ index 29f7e67c2faa54b9860aafa8f24685026712ca60..6b2190e2f56bb328dfc3e2e54099b17e
  PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
  
 diff --git a/sepolicy/private/platform_app.te b/sepolicy/private/platform_app.te
-index 38fa551e9d48ccf51f5416ccaa99546de63721da..fa901d9cab01225305ea14e7183e6aa2ecf3a03f 100644
+index 38fa551..fa901d9 100644
 --- a/sepolicy/private/platform_app.te
 +++ b/sepolicy/private/platform_app.te
 @@ -3,5 +3,5 @@ binder_use(platform_app)
@@ -973,7 +682,7 @@ index 38fa551e9d48ccf51f5416ccaa99546de63721da..fa901d9cab01225305ea14e7183e6aa2
 +# Allow AospaHealth HAL service to be found
 +hal_client_domain(platform_app, hal_aospa_health)
 diff --git a/sepolicy/private/service.te b/sepolicy/private/service.te
-index 94feed8b9085da777d5d0d22c9c3964d2c3b1af6..591619cb4f13739af4e8f258e7cf55a6c0136271 100644
+index 94feed8..591619c 100644
 --- a/sepolicy/private/service.te
 +++ b/sepolicy/private/service.te
 @@ -5,7 +5,7 @@ type dc_dimming_service, system_api_service, system_server_service, service_mana
@@ -986,7 +695,7 @@ index 94feed8b9085da777d5d0d22c9c3964d2c3b1af6..591619cb4f13739af4e8f258e7cf55a6
  # PIH
  type pih_manager_service, app_api_service, system_api_service, system_server_service, service_manager_type;
 diff --git a/sepolicy/private/service_contexts b/sepolicy/private/service_contexts
-index 4ad6a699cd2c3c7d00e86500468f2926e1996322..90108267d5777b7b50a7afb52fcd43f3b34b71ac 100644
+index 4ad6a69..9010826 100644
 --- a/sepolicy/private/service_contexts
 +++ b/sepolicy/private/service_contexts
 @@ -8,7 +8,7 @@ dc_dim                                      u:object_r:dc_dimming_service:s0
@@ -999,7 +708,7 @@ index 4ad6a699cd2c3c7d00e86500468f2926e1996322..90108267d5777b7b50a7afb52fcd43f3
  # PIH
  pih_manager                                 u:object_r:pih_manager_service:s0
 diff --git a/sepolicy/private/system_server.te b/sepolicy/private/system_server.te
-index e8275712d8068e5d43be123f43857bea04d0f32b..a7956e5ed676ab0209c33052608b5ad23721240c 100644
+index e827571..a7956e5 100644
 --- a/sepolicy/private/system_server.te
 +++ b/sepolicy/private/system_server.te
 @@ -14,7 +14,7 @@ set_prop(system_server, device_config_tethering_prop)
@@ -1012,7 +721,7 @@ index e8275712d8068e5d43be123f43857bea04d0f32b..a7956e5ed676ab0209c33052608b5ad2
  # CachedAppOptimizer
  allow system_server zygote_tmpfs:file rw_file_perms;
 diff --git a/sepolicy/public/attributes b/sepolicy/public/attributes
-index d405f3f41222d7d2de666bacc1bb700b9fb88381..ef3f437c03f236f833e50a02cee4b01381f48197 100644
+index d405f3f..ef3f437 100644
 --- a/sepolicy/public/attributes
 +++ b/sepolicy/public/attributes
 @@ -5,10 +5,10 @@ attribute hal_aospa_powershare_client;
@@ -1033,7 +742,7 @@ index d405f3f41222d7d2de666bacc1bb700b9fb88381..ef3f437c03f236f833e50a02cee4b013
 +expandattribute hal_aospa_health_server false;
  
 diff --git a/sepolicy/vendor/file_contexts b/sepolicy/vendor/file_contexts
-index 9f2b7215b7555fe7be9726311bcd036b7aa60c40..3e55d6164d78c397aa7a16339531c5a0f444b70b 100644
+index 9f2b721..3e55d61 100644
 --- a/sepolicy/vendor/file_contexts
 +++ b/sepolicy/vendor/file_contexts
 @@ -8,4 +8,4 @@
@@ -1044,7 +753,7 @@ index 9f2b7215b7555fe7be9726311bcd036b7aa60c40..3e55d6164d78c397aa7a16339531c5a0
 +/(vendor|system/vendor)/bin/hw/vendor\.aospa\.health-service\.default     u:object_r:hal_aospa_health_default_exec:s0
 diff --git a/sepolicy/vendor/hal_lineage_health.te b/sepolicy/vendor/hal_lineage_health.te
 deleted file mode 100644
-index b8fc1dca9f949d3e07c638aeb6e45bcf85c49b85..0000000000000000000000000000000000000000
+index b8fc1dc..0000000
 --- a/sepolicy/vendor/hal_lineage_health.te
 +++ /dev/null
 @@ -1,9 +0,0 @@
@@ -1059,7 +768,7 @@ index b8fc1dca9f949d3e07c638aeb6e45bcf85c49b85..00000000000000000000000000000000
 -binder_call(hal_lineage_health, platform_app)
 diff --git a/sepolicy/vendor/hal_lineage_health_default.te b/sepolicy/vendor/hal_lineage_health_default.te
 deleted file mode 100644
-index 37138c46a8e319a1bbc8ac946176c0c60dc00696..0000000000000000000000000000000000000000
+index 37138c4..0000000
 --- a/sepolicy/vendor/hal_lineage_health_default.te
 +++ /dev/null
 @@ -1,13 +0,0 @@
@@ -1077,7 +786,7 @@ index 37138c46a8e319a1bbc8ac946176c0c60dc00696..00000000000000000000000000000000
 -allow hal_lineage_health_default vendor_sysfs_usb_supply:dir search;
 -allow hal_lineage_health_default vendor_sysfs_usb_supply:file rw_file_perms;
 diff --git a/sepolicy/vendor/service.te b/sepolicy/vendor/service.te
-index b4ab7b22ab6fd8ad5d8e3e37a6a0d6a031045dae..64c635cca1e8be90dc4775997d8388e3cab15805 100644
+index b4ab7b2..64c635c 100644
 --- a/sepolicy/vendor/service.te
 +++ b/sepolicy/vendor/service.te
 @@ -1,2 +1,2 @@
@@ -1085,7 +794,7 @@ index b4ab7b22ab6fd8ad5d8e3e37a6a0d6a031045dae..64c635cca1e8be90dc4775997d8388e3
 -type hal_lineage_health_service, service_manager_type, hal_service_type;
 +type hal_aospa_health_service, service_manager_type, hal_service_type;
 diff --git a/sepolicy/vendor/service_contexts b/sepolicy/vendor/service_contexts
-index bc54fb1089c4dea5b064e00f7c508cb530165243..74d5b16eacae076b29d45e1027d91ac01192c123 100644
+index bc54fb1..74d5b16 100644
 --- a/sepolicy/vendor/service_contexts
 +++ b/sepolicy/vendor/service_contexts
 @@ -1,3 +1,3 @@
@@ -1094,8 +803,23 @@ index bc54fb1089c4dea5b064e00f7c508cb530165243..74d5b16eacae076b29d45e1027d91ac0
 -vendor.lineage.health.IFastCharge/default             u:object_r:hal_lineage_health_service:s0
 +vendor.aospa.health.IChargingControl/default        u:object_r:hal_aospa_health_service:s0
 +vendor.aospa.health.IFastCharge/default             u:object_r:hal_aospa_health_service:s0
+diff --git a/target/board/BoardConfigAOSPA.mk b/target/board/BoardConfigAOSPA.mk
+index 99bf2e3..7885f63 100644
+--- a/target/board/BoardConfigAOSPA.mk
++++ b/target/board/BoardConfigAOSPA.mk
+@@ -11,8 +11,10 @@ endif
+ 
+ ifeq ($(call is-board-platform-in-list,$(QCOM_BOARD_PLATFORMS)),true)
+ # Include our Qualcomm Board configuration.
++ifneq ($(TARGET_PUDDING_CAF_STACK),true)
+ include device/qcom/common/BoardConfigQcom.mk
+ endif
++endif
+ 
+ # Include our private configuration - optional.
+ -include vendor/aospa-priv/target/board/BoardConfigAOSPAPriv.mk
 diff --git a/target/config/aospa_vendor_framework_compatibility_matrix.xml b/target/config/aospa_vendor_framework_compatibility_matrix.xml
-index e099f5f348a27cb5bbe9a7e448ee082e16c484cb..c8924ce942a7cbbdec02a85fadbd2d6dd0181447 100644
+index e099f5f..c8924ce 100644
 --- a/target/config/aospa_vendor_framework_compatibility_matrix.xml
 +++ b/target/config/aospa_vendor_framework_compatibility_matrix.xml
 @@ -20,7 +20,7 @@
@@ -1107,26 +831,8 @@ index e099f5f348a27cb5bbe9a7e448ee082e16c484cb..c8924ce942a7cbbdec02a85fadbd2d6d
          <version>1-2</version>
          <interface>
              <name>IChargingControl</name>
-diff --git a/target/config/permissions/org.lineageos.health.xml b/target/config/permissions/org.lineageos.health.xml
-deleted file mode 100644
-index f3ab161ba36a56674e3a29534a0c9dc49f0f22e4..0000000000000000000000000000000000000000
---- a/target/config/permissions/org.lineageos.health.xml
-+++ /dev/null
-@@ -1,12 +0,0 @@
--<?xml version="1.0" encoding="utf-8"?>
--<!--
--     SPDX-FileCopyrightText: The LineageOS Project
--     SPDX-License-Identifier: Apache-2.0
---->
--<permissions>
--    <!-- The feature listed here coincides with the HealthInterfaceService declared as
--        part of the external lineage service init in SystemServer. If this xml isn't present
--        on the device, the service will not be published as a binder service!
--    -->
--    <feature name="org.lineageos.health" />
--</permissions>
 diff --git a/target/product/aospa-target.mk b/target/product/aospa-target.mk
-index 41af06218d7f2600f0379291f60f6c0368fed293..4f7e4aeb7c3f65301072dce7ad4b4b081f6d1ed2 100644
+index 41af062..ddfdbf4 100644
 --- a/target/product/aospa-target.mk
 +++ b/target/product/aospa-target.mk
 @@ -158,7 +158,7 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
@@ -1138,3 +844,28 @@ index 41af06218d7f2600f0379291f60f6c0368fed293..4f7e4aeb7c3f65301072dce7ad4b4b08
  
  # Preinstalled Packages
  PRODUCT_COPY_FILES += \
+@@ -185,7 +185,9 @@ PRODUCT_PACKAGES += \
+     libqti_vndfwk_detect.vendor
+ 
+ # Qualcomm Common
++ifneq ($(TARGET_PUDDING_CAF_STACK),true)
+ $(call inherit-product, device/qcom/common/common.mk)
++endif
+ 
+ # Rescue Party
+ # Disable RescueParty due to high risk of data loss
+@@ -241,9 +243,11 @@ PRODUCT_PACKAGES += \
+ PRODUCT_PACKAGES += \
+     Stk
+ 
+-PRODUCT_BOOT_JARS += \
+-    tcmiface \
+-    telephony-ext
++PRODUCT_BOOT_JARS += tcmiface
++# Pudding already declares telephony-ext before its Xiaomi telephony stub.
++ifneq ($(TARGET_PUDDING_CAF_STACK),true)
++PRODUCT_BOOT_JARS += telephony-ext
++endif
+ endif
+ 
+ # TextClassifier

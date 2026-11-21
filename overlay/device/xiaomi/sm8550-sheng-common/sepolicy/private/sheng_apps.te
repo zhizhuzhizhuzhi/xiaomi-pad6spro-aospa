@@ -1,0 +1,6 @@
+# Keep standard platform-app behavior, but isolate device-specific HAL grants.
+typeattribute sheng_soter_app coredomain;
+app_domain(sheng_soter_app)
+net_domain(sheng_soter_app)
+bluetooth_domain(sheng_soter_app)
+platform_app_domain(sheng_soter_app)

@@ -1,5 +1,5 @@
 diff --git a/health/aidl/default/HalHealthLoop.cpp b/health/aidl/default/HalHealthLoop.cpp
-index ec23c10bc0d4d557fa07ee5830d9a3b2fc27d8b1..859a7efd2c8dea4da4fcc1f88fa9286b1a8fe100 100644
+index ec23c10..859a7ef 100644
 --- a/health/aidl/default/HalHealthLoop.cpp
 +++ b/health/aidl/default/HalHealthLoop.cpp
 @@ -34,6 +34,10 @@ void HalHealthLoop::Heartbeat() {
@@ -14,7 +14,7 @@ index ec23c10bc0d4d557fa07ee5830d9a3b2fc27d8b1..859a7efd2c8dea4da4fcc1f88fa9286b
      // ignore errors. impl may not be able to handle any callbacks, so
      // update() may return errors.
 diff --git a/health/aidl/default/include/health-impl/HalHealthLoop.h b/health/aidl/default/include/health-impl/HalHealthLoop.h
-index c46aaa4cb667624513a6f0e522a749167b043a47..008944288a15176cc8c9a67eb843aa2d52dce87c 100644
+index c46aaa4..0089442 100644
 --- a/health/aidl/default/include/health-impl/HalHealthLoop.h
 +++ b/health/aidl/default/include/health-impl/HalHealthLoop.h
 @@ -38,6 +38,7 @@ class HalHealthLoopCallback {
@@ -34,7 +34,7 @@ index c46aaa4cb667624513a6f0e522a749167b043a47..008944288a15176cc8c9a67eb843aa2d
    private:
      std::shared_ptr<IHealth> service_;
 diff --git a/health/aidl/default/include/health-impl/Health.h b/health/aidl/default/include/health-impl/Health.h
-index b5c7a4a28c749cef59289412b0984e556ac04b14..a786cfdf1c956503d23a5857f0af1891da261f90 100644
+index b5c7a4a..a786cfd 100644
 --- a/health/aidl/default/include/health-impl/Health.h
 +++ b/health/aidl/default/include/health-impl/Health.h
 @@ -115,7 +115,7 @@ class Health : public BnHealth, public HalHealthLoopCallback {
@@ -47,7 +47,7 @@ index b5c7a4a28c749cef59289412b0984e556ac04b14..a786cfdf1c956503d23a5857f0af1891
    private:
      friend LinkedCallback;  // for exposing death_recipient_
 diff --git a/health/utils/libhealthloop/HealthLoop.cpp b/health/utils/libhealthloop/HealthLoop.cpp
-index 8501f334f4038ca38078b41b16478314187a4c25..6d3254de8b11ecf67365075edc87b15911ae3c30 100644
+index 8501f33..6d3254d 100644
 --- a/health/utils/libhealthloop/HealthLoop.cpp
 +++ b/health/utils/libhealthloop/HealthLoop.cpp
 @@ -137,22 +137,29 @@ bool HealthLoop::RecvUevents() {
@@ -87,7 +87,7 @@ index 8501f334f4038ca38078b41b16478314187a4c25..6d3254de8b11ecf67365075edc87b159
  }
  
 diff --git a/health/utils/libhealthloop/include/health/HealthLoop.h b/health/utils/libhealthloop/include/health/HealthLoop.h
-index 43c38dca104fefcbf54da392860e7e3b19f46795..49158279014e8f908c2452853238522036e4f82e 100644
+index 43c38dc..4915827 100644
 --- a/health/utils/libhealthloop/include/health/HealthLoop.h
 +++ b/health/utils/libhealthloop/include/health/HealthLoop.h
 @@ -66,6 +66,9 @@ class HealthLoop {

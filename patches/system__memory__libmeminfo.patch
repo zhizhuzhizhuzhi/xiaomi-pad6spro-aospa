@@ -1,5 +1,5 @@
 diff --git a/libdmabufinfo/Android.bp b/libdmabufinfo/Android.bp
-index d64d4b2e294613564543ca4a1d9e365190fab9fe..0c7ed8a7a627a105ecf2d4d4c06cf942c5a4ad91 100644
+index d64d4b2..0c7ed8a 100644
 --- a/libdmabufinfo/Android.bp
 +++ b/libdmabufinfo/Android.bp
 @@ -35,8 +35,27 @@ cc_defaults {
@@ -31,7 +31,7 @@ index d64d4b2e294613564543ca4a1d9e365190fab9fe..0c7ed8a7a627a105ecf2d4d4c06cf942
      product_available: true,
      host_supported: true,
 diff --git a/libdmabufinfo/dmabuf_per_buffer_stats.cpp b/libdmabufinfo/dmabuf_per_buffer_stats.cpp
-index 02462a7f6c30ef809013b93e23e9b37615bdfdaf..62eac695e2dbeb42732b5f3636e63401f114e96b 100644
+index 02462a7..62eac69 100644
 --- a/libdmabufinfo/dmabuf_per_buffer_stats.cpp
 +++ b/libdmabufinfo/dmabuf_per_buffer_stats.cpp
 @@ -14,6 +14,8 @@

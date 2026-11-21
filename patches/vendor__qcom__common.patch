@@ -1,5 +1,18 @@
+diff --git a/system/perf/Android.bp b/system/perf/Android.bp
+index 960614e..6e8689f 100644
+--- a/system/perf/Android.bp
++++ b/system/perf/Android.bp
+@@ -3,6 +3,8 @@
+ //
+ 
+ soong_namespace {
++    imports: [
++    ],
+ }
+ 
+ cc_prebuilt_library_shared {
 diff --git a/system/perf/perf-vendor.mk b/system/perf/perf-vendor.mk
-index c00af03573254191946b4140197395eb2001b7d0..4e89a4b4b5e7d575b7e8d53fd53f42e7b72f19de 100644
+index c00af03..4e89a4b 100644
 --- a/system/perf/perf-vendor.mk
 +++ b/system/perf/perf-vendor.mk
 @@ -22,7 +22,6 @@ PRODUCT_PACKAGES += \
@@ -20,7 +33,7 @@ index c00af03573254191946b4140197395eb2001b7d0..4e89a4b4b5e7d575b7e8d53fd53f42e7
      workloadclassifier \
      QPerformance \
 diff --git a/system/telephony/telephony-vendor.mk b/system/telephony/telephony-vendor.mk
-index 3f9716cac21370dbfc43f5fbc9f9e1b6bce2f9f6..6e477d7d927cc292e473693160d992b3ead9b0b0 100644
+index 3f9716c..6e477d7 100644
 --- a/system/telephony/telephony-vendor.mk
 +++ b/system/telephony/telephony-vendor.mk
 @@ -87,8 +87,6 @@ PRODUCT_PACKAGES += \
@@ -33,7 +46,7 @@ index 3f9716cac21370dbfc43f5fbc9f9e1b6bce2f9f6..6e477d7d927cc292e473693160d992b3
      vendor.qti.ImsRtpService-V2-ndk \
      vendor.qti.ImsVtService-ndk \
 diff --git a/vendor/display/5.15/Android.bp b/vendor/display/5.15/Android.bp
-index 7adc9aa959d5e38e5574ceb64d62e104d5fab0b8..a97cd658e206c0046ceff34031008ab0266dfd53 100644
+index 7adc9aa..a97cd65 100644
 --- a/vendor/display/5.15/Android.bp
 +++ b/vendor/display/5.15/Android.bp
 @@ -641,6 +641,7 @@ cc_prebuilt_library_shared {
@@ -61,7 +74,7 @@ index 7adc9aa959d5e38e5574ceb64d62e104d5fab0b8..a97cd658e206c0046ceff34031008ab0
      strip: {
          none: true,
 diff --git a/vendor/perf/Android.bp b/vendor/perf/Android.bp
-index 4938354dc6590734ce661819a4eb88fa8c57edfe..39a6dcae21c3035e6d26eb5573c3f4ca6a2963f1 100644
+index 4938354..39a6dca 100644
 --- a/vendor/perf/Android.bp
 +++ b/vendor/perf/Android.bp
 @@ -828,6 +828,7 @@ cc_prebuilt_library_shared {
@@ -73,7 +86,7 @@ index 4938354dc6590734ce661819a4eb88fa8c57edfe..39a6dcae21c3035e6d26eb5573c3f4ca
                  "libc",
                  "libm",
 diff --git a/vendor/perf/perf-vendor.mk b/vendor/perf/perf-vendor.mk
-index 75f5e4731a2bcbdf4ac22ac67ac366b37f5aaade..93f32fb4b08c4ccaac31c7b183cc1776646bbf1c 100644
+index 75f5e47..93f32fb 100644
 --- a/vendor/perf/perf-vendor.mk
 +++ b/vendor/perf/perf-vendor.mk
 @@ -9,15 +9,12 @@ PRODUCT_COPY_FILES += \
@@ -119,7 +132,7 @@ index 75f5e4731a2bcbdf4ac22ac67ac366b37f5aaade..93f32fb4b08c4ccaac31c7b183cc1776
 -    vendor.qti.qspmhal-service
 +    poweropt-service
 diff --git a/vendor/wlan/Android.bp b/vendor/wlan/Android.bp
-index ee1953ed085e0db0e314e3e26c6054b23fd0c9de..a55ddf42bc8548d3a20316c1894795986d3a5644 100644
+index ee1953e..a55ddf4 100644
 --- a/vendor/wlan/Android.bp
 +++ b/vendor/wlan/Android.bp
 @@ -41,6 +41,7 @@ prebuilt_etc_xml {

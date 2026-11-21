@@ -1,5 +1,5 @@
 diff --git a/BufferAllocatorWrapper.cpp b/BufferAllocatorWrapper.cpp
-index 3b66eb8d5de7de36c0886a2fe0bca748aaa328b4..07848c3fbd68cac202b84dae4e0eb995f42e1fa9 100644
+index 3b66eb8..07848c3 100644
 --- a/BufferAllocatorWrapper.cpp
 +++ b/BufferAllocatorWrapper.cpp
 @@ -18,9 +18,18 @@

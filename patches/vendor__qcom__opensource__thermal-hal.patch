@@ -1,5 +1,5 @@
 diff --git a/android.hardware.thermal-service.qti.rc b/android.hardware.thermal-service.qti.rc
-index 1311e23d84338397f97f328ff78b0682281c953d..888f27627023ea9e94f3013a83496d4e7d53243b 100644
+index 1311e23..888f276 100644
 --- a/android.hardware.thermal-service.qti.rc
 +++ b/android.hardware.thermal-service.qti.rc
 @@ -40,4 +40,4 @@ service vendor.thermal-hal /vendor/bin/hw/android.hardware.thermal-service.qti
@@ -9,7 +9,7 @@ index 1311e23d84338397f97f328ff78b0682281c953d..888f27627023ea9e94f3013a83496d4e
 -    restart android.thermal-hal
 +    restart vendor.thermal-hal
 diff --git a/thermalCommon.cpp b/thermalCommon.cpp
-index eeaafaa21147ee0e969c4c173331d0e508df0338..9a95fd2e086808d9282792228a8394f2e802d780 100644
+index eeaafaa..9a95fd2 100644
 --- a/thermalCommon.cpp
 +++ b/thermalCommon.cpp
 @@ -34,6 +34,10 @@ Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
@@ -119,7 +119,7 @@ index eeaafaa21147ee0e969c4c173331d0e508df0338..9a95fd2e086808d9282792228a8394f2
  }
  
 diff --git a/thermalConfig.cpp b/thermalConfig.cpp
-index 62a295987b97d92d08b086af5e3a5ac9367192dd..4ed46c372f441818e53919c01e3ee74e014a8bd6 100644
+index 62a2959..4ed46c3 100644
 --- a/thermalConfig.cpp
 +++ b/thermalConfig.cpp
 @@ -34,6 +34,7 @@
@@ -162,7 +162,7 @@ index 62a295987b97d92d08b086af5e3a5ac9367192dd..4ed46c372f441818e53919c01e3ee74e
  		for (it_vec = thermalConfig.begin();
  				it_vec != thermalConfig.end(); it_vec++) {
 diff --git a/thermalUtils.cpp b/thermalUtils.cpp
-index c861645e1720c426ab60ce81ee1347e30e15b5de..5cf18048dd27998fd25946e7b704609bc01e1bdc 100644
+index c861645..5cf1804 100644
 --- a/thermalUtils.cpp
 +++ b/thermalUtils.cpp
 @@ -160,9 +160,9 @@ int ThermalUtils::readTemperatures(std::vector<Temperature>& temp)
@@ -192,7 +192,7 @@ index c861645e1720c426ab60ce81ee1347e30e15b5de..5cf18048dd27998fd25946e7b704609b
  	}
  
 diff --git a/thermalUtilsNetlink.cpp b/thermalUtilsNetlink.cpp
-index af0c06c6423c3825e789543cbb1675eab0d8541b..0243439d6fdd26e081d0b88a67c2660674de935c 100644
+index af0c06c..0243439 100644
 --- a/thermalUtilsNetlink.cpp
 +++ b/thermalUtilsNetlink.cpp
 @@ -258,9 +258,9 @@ int ThermalUtils::readTemperatures(std::vector<Temperature>& temp)

@@ -1,5 +1,5 @@
 diff --git a/logd/LogAudit.cpp b/logd/LogAudit.cpp
-index 372ccdd5631c65cfa63251e96becf7ac4455c8fd..15553795c208adbaabac24c96702a88cff267fdc 100644
+index 372ccdd..1555379 100644
 --- a/logd/LogAudit.cpp
 +++ b/logd/LogAudit.cpp
 @@ -335,6 +335,9 @@ int LogAudit::logPrint(const char* fmt, ...) {

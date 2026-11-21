@@ -1,5 +1,5 @@
 diff --git a/service/java/com/android/server/wifi/WifiServiceImpl.java b/service/java/com/android/server/wifi/WifiServiceImpl.java
-index 8889ddd1887e8344f8f9ca393a4250ab91b9f89a..914bc649281122ddce0427323169601d25e27d10 100644
+index 8889ddd..914bc64 100644
 --- a/service/java/com/android/server/wifi/WifiServiceImpl.java
 +++ b/service/java/com/android/server/wifi/WifiServiceImpl.java
 @@ -1186,7 +1186,8 @@ public class WifiServiceImpl extends IWifiManager.Stub {
@@ -24,7 +24,7 @@ index 8889ddd1887e8344f8f9ca393a4250ab91b9f89a..914bc649281122ddce0427323169601d
                          mContext.getSystemService(ThreadNetworkManager.class);
                  if (threadManager != null) {
 diff --git a/service/java/com/android/server/wifi/util/ApConfigUtil.java b/service/java/com/android/server/wifi/util/ApConfigUtil.java
-index 32ec5ad996e3b97db63684c96c106ae678bf14c2..f68cac2881b00d4790f82681233c598c3eac9da9 100644
+index 32ec5ad..f68cac2 100644
 --- a/service/java/com/android/server/wifi/util/ApConfigUtil.java
 +++ b/service/java/com/android/server/wifi/util/ApConfigUtil.java
 @@ -339,6 +339,9 @@ public class ApConfigUtil {

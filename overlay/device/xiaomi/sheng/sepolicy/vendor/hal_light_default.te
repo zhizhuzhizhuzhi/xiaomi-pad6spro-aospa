@@ -1,0 +1,2 @@
+# Backlight class links inherit vendor_sysfs_graphics on the 6.18 kernel.
+allow hal_light_default vendor_sysfs_graphics:lnk_file { getattr read };

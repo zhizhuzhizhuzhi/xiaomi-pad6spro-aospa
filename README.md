@@ -46,12 +46,19 @@ bash ../aospa-sheng-kit/scripts/prepare.sh "$PWD" /path/to/stock-dump \
 
 [设备输入说明](docs/DEVICE_INPUTS.md) 记录提取与兼容处理；`dependencies.json` 固定文件大小和 SHA256。原厂固件、专有文件及签名私钥不放入 Git。脚本不自动下载不明版本，缺少或不匹配时会停止。
 
+也可以直接安装现有匹配源码树中整理的输入：
+
+```sh
+python3 ../aospa-sheng-kit/scripts/fetch-dependencies.py "$PWD" \
+  --source /path/to/prepared-sheng-inputs --replace-stock-inputs
+```
+
 ## 编译和打包
 
 ### userdebug
 
 ```sh
-BUILD_NUMBER=20261029 bash ../aospa-sheng-kit/scripts/build.sh "$PWD" userdebug "$(nproc)"
+BUILD_NUMBER=20261121 bash ../aospa-sheng-kit/scripts/build.sh "$PWD" userdebug "$(nproc)"
 OUT_DIR=out-sheng-userdebug python3 ../aospa-sheng-kit/scripts/package.py "$PWD" \
   out-sheng-userdebug/target/product/sheng/obj/PACKAGING/target_files_intermediates/aospa_sheng-target_files.zip \
   "$PWD/aospa_sheng-fastboot-userdebug.zip"
@@ -60,7 +67,7 @@ OUT_DIR=out-sheng-userdebug python3 ../aospa-sheng-kit/scripts/package.py "$PWD"
 ### user
 
 ```sh
-BUILD_NUMBER=20261029 bash ../aospa-sheng-kit/scripts/build.sh "$PWD" user "$(nproc)"
+BUILD_NUMBER=20261121 bash ../aospa-sheng-kit/scripts/build.sh "$PWD" user "$(nproc)"
 OUT_DIR=out-sheng-user python3 ../aospa-sheng-kit/scripts/package.py "$PWD" \
   out-sheng-user/target/product/sheng/obj/PACKAGING/target_files_intermediates/aospa_sheng-target_files.zip \
   "$PWD/aospa_sheng-fastboot-user.zip"

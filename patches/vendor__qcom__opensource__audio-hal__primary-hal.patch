@@ -1,5 +1,20 @@
+diff --git a/configs/kalama/audio_policy_configuration.xml b/configs/kalama/audio_policy_configuration.xml
+index 7741665..e66fcb3 100644
+--- a/configs/kalama/audio_policy_configuration.xml
++++ b/configs/kalama/audio_policy_configuration.xml
+@@ -533,8 +533,8 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+         <!-- Remote Submix Audio HAL -->
+         <xi:include href="/vendor/etc/r_submix_audio_policy_configuration.xml"/>
+ 
+-        <!-- Bluetooth Audio HAL for hearing aid -->
+-        <xi:include href="/vendor/etc/bluetooth_qti_hearing_aid_audio_policy_configuration.xml"/>
++        <!-- Bluetooth Audio HAL (software A2DP and hearing aid) -->
++        <xi:include href="/vendor/etc/bluetooth_qti_audio_policy_configuration.xml"/>
+ 
+     </modules>
+     <!-- End of Modules section -->
 diff --git a/configs/kalama/kalama.mk b/configs/kalama/kalama.mk
-index 1c3e9c7cf2a925bf93f35d272882441aa4a164cf..6ab3a6cbaad8737654a9a93e1964f327ab667599 100644
+index 1c3e9c7..6ab3a6c 100644
 --- a/configs/kalama/kalama.mk
 +++ b/configs/kalama/kalama.mk
 @@ -125,7 +125,7 @@ CONFIG_SKU_OUT_DIR := $(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_$(DEVICE_SKU)

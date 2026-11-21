@@ -1,5 +1,5 @@
 diff --git a/audio_route/Android.bp b/audio_route/Android.bp
-index fbe23aadab330c9a3b7a02ecbe521d25855e1b3b..6c4a3be175db33c25af29bf2913381066fe9acef 100644
+index fbe23aa..6c4a3be 100644
 --- a/audio_route/Android.bp
 +++ b/audio_route/Android.bp
 @@ -26,6 +26,13 @@ cc_defaults {

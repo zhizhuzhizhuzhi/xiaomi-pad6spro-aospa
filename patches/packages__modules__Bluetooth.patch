@@ -1,5 +1,5 @@
 diff --git a/android/app/aidl/Android.bp b/android/app/aidl/Android.bp
-index 6ed17b4b7b1206c907730d423c7fcb56befb914c..c2fc724cc9cb430381384dcb4e8308c253da3614 100644
+index 6ed17b4..c2fc724 100644
 --- a/android/app/aidl/Android.bp
 +++ b/android/app/aidl/Android.bp
 @@ -15,6 +15,10 @@ filegroup {
@@ -14,7 +14,7 @@ index 6ed17b4b7b1206c907730d423c7fcb56befb914c..c2fc724cc9cb430381384dcb4e8308c2
          "android/bluetooth/IBluetoothA2dpSink.aidl",
          "android/bluetooth/IBluetoothActivityEnergyInfoListener.aidl",
 diff --git a/android/app/aidl/android/bluetooth/IBluetooth.aidl b/android/app/aidl/android/bluetooth/IBluetooth.aidl
-index d9eb63d3e2ba32755f8ea2705ddbfe3af88e576b..a6930ca437252249674d2d7bee4fa8b162f6f1ca 100644
+index d9eb63d..a6930ca 100644
 --- a/android/app/aidl/android/bluetooth/IBluetooth.aidl
 +++ b/android/app/aidl/android/bluetooth/IBluetooth.aidl
 @@ -58,6 +58,9 @@ import android.bluetooth.IBluetoothPreferredAudioProfilesCallback;
@@ -45,7 +45,7 @@ index d9eb63d3e2ba32755f8ea2705ddbfe3af88e576b..a6930ca437252249674d2d7bee4fa8b1
 +            in IBluetoothBondedDevicesCallback callback);
  }
 diff --git a/android/app/src/com/android/bluetooth/btservice/AdapterServiceBinder.java b/android/app/src/com/android/bluetooth/btservice/AdapterServiceBinder.java
-index 7aa098acba641d684b0a1578b531904da2dd6386..a0fd2fa3083850edcad0065373171538ff6d4204 100644
+index 7aa098a..a0fd2fa 100644
 --- a/android/app/src/com/android/bluetooth/btservice/AdapterServiceBinder.java
 +++ b/android/app/src/com/android/bluetooth/btservice/AdapterServiceBinder.java
 @@ -47,6 +47,9 @@ import android.bluetooth.BluetoothAdapter;
@@ -162,7 +162,7 @@ index 7aa098acba641d684b0a1578b531904da2dd6386..a0fd2fa3083850edcad0065373171538
      public boolean isLeAudioBroadcastAssistantSupported() {
          return Config.isProfileSupported(BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);
 diff --git a/flags/framework.aconfig b/flags/framework.aconfig
-index b16a13254fa0e8560344f7fc1a0f72f234281e13..4fa9de0cbe8411cf0daec3fb174d447f402e30a5 100644
+index b16a132..4fa9de0 100644
 --- a/flags/framework.aconfig
 +++ b/flags/framework.aconfig
 @@ -44,3 +44,36 @@ flag {
@@ -203,7 +203,7 @@ index b16a13254fa0e8560344f7fc1a0f72f234281e13..4fa9de0cbe8411cf0daec3fb174d447f
 +    }
 +}
 diff --git a/framework/api/module-lib-current.txt b/framework/api/module-lib-current.txt
-index 33e34c6c2bbc7809ed3bf786db0e35dd47bf4d3d..4081cc654cef8648d27056c2889ce60991f982d2 100644
+index 33e34c6..4081cc6 100644
 --- a/framework/api/module-lib-current.txt
 +++ b/framework/api/module-lib-current.txt
 @@ -2,6 +2,25 @@
@@ -233,7 +233,7 @@ index 33e34c6c2bbc7809ed3bf786db0e35dd47bf4d3d..4081cc654cef8648d27056c2889ce609
      method public static void registerServiceWrappers();
      method public static void setBinderCallsStatsInitializer(@NonNull java.util.function.Consumer<android.content.Context>);
 diff --git a/framework/java/android/bluetooth/BluetoothAdapter.java b/framework/java/android/bluetooth/BluetoothAdapter.java
-index a49f8f015b0be8d481f5440d66eb70626ac84432..66bb58966f71919ee89023a18a90608efaec9b94 100644
+index a49f8f0..66bb589 100644
 --- a/framework/java/android/bluetooth/BluetoothAdapter.java
 +++ b/framework/java/android/bluetooth/BluetoothAdapter.java
 @@ -2010,6 +2010,41 @@ public final class BluetoothAdapter {
@@ -374,7 +374,7 @@ index a49f8f015b0be8d481f5440d66eb70626ac84432..66bb58966f71919ee89023a18a90608e
       * Gets the currently supported profiles by the adapter.
       *
 diff --git a/service/src/ShellCommand.kt b/service/src/ShellCommand.kt
-index b2ceaeba25c08b3b69c94721ec00f216dc1afd77..7689fe7fc98d0ce80dedeffa0e62087796a2d5a9 100644
+index b2ceaeb..7689fe7 100644
 --- a/service/src/ShellCommand.kt
 +++ b/service/src/ShellCommand.kt
 @@ -31,7 +31,7 @@ class ShellCommand(private val binder: ServerBinder, private val waitForState: (
@@ -387,7 +387,7 @@ index b2ceaeba25c08b3b69c94721ec00f216dc1afd77..7689fe7fc98d0ce80dedeffa0e620877
  
      data class Command(
 diff --git a/system/gd/os/linux_generic/files.cc b/system/gd/os/linux_generic/files.cc
-index 045c02c471f80fe35c6569feff5e17fbd4be433e..4d7607b2eb9dfc9f7ac3ebc0482478dd0a694daa 100644
+index 045c02c..4d7607b 100644
 --- a/system/gd/os/linux_generic/files.cc
 +++ b/system/gd/os/linux_generic/files.cc
 @@ -220,7 +220,11 @@ std::optional<std::chrono::time_point<std::chrono::system_clock, std::chrono::na

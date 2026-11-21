@@ -1,5 +1,27 @@
+diff --git a/quickstep/src/com/android/launcher3/taskbar/TaskbarView.java b/quickstep/src/com/android/launcher3/taskbar/TaskbarView.java
+index 56ea8ec..4eaa6c3 100644
+--- a/quickstep/src/com/android/launcher3/taskbar/TaskbarView.java
++++ b/quickstep/src/com/android/launcher3/taskbar/TaskbarView.java
+@@ -266,6 +266,8 @@ public class TaskbarView extends FrameLayout implements FolderIcon.FolderIconPar
+ 
+         mAllAppsButtonContainer = (TaskbarAllAppsButtonContainer) inflate(
+                 R.layout.taskbar_all_apps_button_container);
++        mAllAppsButtonContainer.setLayoutParams(
++                new TaskbarLayoutParams(mIconTouchSize, mIconTouchSize));
+         mAllAppsButtonTranslationOffset = (int) getResources().getDimension(
+                 mAllAppsButtonContainer.getAllAppsButtonTranslationXOffset(
+                         mActivityContext.isTransientTaskbar()));
+@@ -274,6 +276,8 @@ public class TaskbarView extends FrameLayout implements FolderIcon.FolderIconPar
+ 
+         mTaskbarDividerContainer = (TaskbarDividerContainer) inflate(
+                 R.layout.taskbar_divider_button_container);
++        mTaskbarDividerContainer.setLayoutParams(
++                new TaskbarLayoutParams(mIconTouchSize, mIconTouchSize));
+ 
+         if (ENABLE_TASKBAR_OVERFLOW.isTrue()) {
+             mTaskbarRecentsOverflowView = TaskbarOverflowView.inflateIcon(OverflowType.RECENTS,
 diff --git a/quickstep/src/com/android/launcher3/taskbar/TaskbarViewController.java b/quickstep/src/com/android/launcher3/taskbar/TaskbarViewController.java
-index d2823bfe4cb487d5b8c412436fec990f4d5398a4..83ff99e1fa34a8ea29e4f61d34c58918cc8a05c6 100644
+index d2823bf..83ff99e 100644
 --- a/quickstep/src/com/android/launcher3/taskbar/TaskbarViewController.java
 +++ b/quickstep/src/com/android/launcher3/taskbar/TaskbarViewController.java
 @@ -1123,7 +1123,8 @@ public class TaskbarViewController implements TaskbarControllers.LoggableTaskbar
@@ -13,7 +35,7 @@ index d2823bfe4cb487d5b8c412436fec990f4d5398a4..83ff99e1fa34a8ea29e4f61d34c58918
          setter.setFloat(mTaskbarNavButtonTranslationY, VALUE, -offsetY, interpolator);
          setter.setFloat(mTaskbarNavButtonTranslationYForInAppDisplay, VALUE, offsetY, interpolator);
 diff --git a/quickstep/src/com/android/quickstep/util/ScalingWorkspaceRevealAnim.kt b/quickstep/src/com/android/quickstep/util/ScalingWorkspaceRevealAnim.kt
-index b1385707ef06cc689bcba816c1417d9507dba2a5..57319329ee66cbf4889beaeaa2f087e4a26d4369 100644
+index b138570..5731932 100644
 --- a/quickstep/src/com/android/quickstep/util/ScalingWorkspaceRevealAnim.kt
 +++ b/quickstep/src/com/android/quickstep/util/ScalingWorkspaceRevealAnim.kt
 @@ -127,8 +127,12 @@ class ScalingWorkspaceRevealAnim(
@@ -55,7 +77,7 @@ index b1385707ef06cc689bcba816c1417d9507dba2a5..57319329ee66cbf4889beaeaa2f087e4
          if (playAlphaReveal) {
              // Fade in quickly at the beginning of the animation, so the content doesn't look like
 diff --git a/res/xml/device_profiles.xml b/res/xml/device_profiles.xml
-index 19edb3e59010576653eb9399bdfe07dc4566ea3d..dc261f847e0a84c2bd141631e3b3009b70b34c14 100644
+index 19edb3e..dc261f8 100644
 --- a/res/xml/device_profiles.xml
 +++ b/res/xml/device_profiles.xml
 @@ -226,6 +226,11 @@
@@ -179,7 +201,7 @@ index 19edb3e59010576653eb9399bdfe07dc4566ea3d..dc261f847e0a84c2bd141631e3b3009b
              launcher:minWidthDps="603"
              launcher:minHeightDps="564"
 diff --git a/src/com/android/launcher3/deviceprofile/parser/GridOption.kt b/src/com/android/launcher3/deviceprofile/parser/GridOption.kt
-index fceef0196dc4c8df1364f6daf2fd421f9cccdfa2..aea0d033fbf5b46fe3c74fc3f4dc8ca173a10405 100644
+index fceef01..aea0d03 100644
 --- a/src/com/android/launcher3/deviceprofile/parser/GridOption.kt
 +++ b/src/com/android/launcher3/deviceprofile/parser/GridOption.kt
 @@ -432,7 +432,13 @@ class GridOption private constructor(ta: TypedArray, displayInfo: LauncherDispla

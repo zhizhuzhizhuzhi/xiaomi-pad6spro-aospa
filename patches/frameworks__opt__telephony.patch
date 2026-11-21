@@ -1,5 +1,5 @@
 diff --git a/src/java/com/android/internal/telephony/RILUtils.java b/src/java/com/android/internal/telephony/RILUtils.java
-index 86c957e82d2dd762ea5ba22b84d34626b10264de..ca40df8714e9475a13aead963dead807d2e2285e 100644
+index 86c957e..ca40df8 100644
 --- a/src/java/com/android/internal/telephony/RILUtils.java
 +++ b/src/java/com/android/internal/telephony/RILUtils.java
 @@ -3571,7 +3571,9 @@ public class RILUtils {
@@ -23,7 +23,7 @@ index 86c957e82d2dd762ea5ba22b84d34626b10264de..ca40df8714e9475a13aead963dead807
                  try {
                      ia = InetAddresses.parseNumericAddress(dns);
 diff --git a/src/java/com/android/internal/telephony/analytics/TelephonyAnalytics.java b/src/java/com/android/internal/telephony/analytics/TelephonyAnalytics.java
-index 6ee0dadc2ea41ed56d23d5f5b305b5d85d433968..38c7d8fe79b125e27fe12ea0e61c6a9f1e35bb48 100644
+index 6ee0dad..38c7d8f 100644
 --- a/src/java/com/android/internal/telephony/analytics/TelephonyAnalytics.java
 +++ b/src/java/com/android/internal/telephony/analytics/TelephonyAnalytics.java
 @@ -76,7 +76,7 @@ public class TelephonyAnalytics {
@@ -112,7 +112,7 @@ index 6ee0dadc2ea41ed56d23d5f5b305b5d85d433968..38c7d8fe79b125e27fe12ea0e61c6a9f
      }
  
 diff --git a/src/java/com/android/internal/telephony/satellite/SatelliteController.java b/src/java/com/android/internal/telephony/satellite/SatelliteController.java
-index 4e9547f228d2bb71ca8bb2863b7833699f41b469..db9de6c06b4a06f3a239acfef1bb9e4459349f5a 100644
+index 4e9547f..db9de6c 100644
 --- a/src/java/com/android/internal/telephony/satellite/SatelliteController.java
 +++ b/src/java/com/android/internal/telephony/satellite/SatelliteController.java
 @@ -3679,17 +3679,19 @@ public class SatelliteController extends Handler {
@@ -164,7 +164,7 @@ index 4e9547f228d2bb71ca8bb2863b7833699f41b469..db9de6c06b4a06f3a239acfef1bb9e44
  
      /**
 diff --git a/tests/telephonytests/src/com/android/internal/telephony/RILTest.java b/tests/telephonytests/src/com/android/internal/telephony/RILTest.java
-index 9115a2e6ad2a9ba35cc14bd4bc9c4f6344539f69..5cf58016841884f52ce425e05846bc5be1a7966e 100644
+index 9115a2e..5cf5801 100644
 --- a/tests/telephonytests/src/com/android/internal/telephony/RILTest.java
 +++ b/tests/telephonytests/src/com/android/internal/telephony/RILTest.java
 @@ -2173,6 +2173,34 @@ public class RILTest extends TelephonyTest {

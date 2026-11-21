@@ -1,5 +1,5 @@
 diff --git a/Android.bp b/Android.bp
-index bb55210f23c90ef5a2fd3e8dd514f82fe4b163b5..34bddd91f4baa39b4418d20dd3c5e0a83d8b7b8e 100644
+index bb55210..34bddd9 100644
 --- a/Android.bp
 +++ b/Android.bp
 @@ -47,3 +47,32 @@ qtilocation_cc_defaults {
@@ -36,7 +36,7 @@ index bb55210f23c90ef5a2fd3e8dd514f82fe4b163b5..34bddd91f4baa39b4418d20dd3c5e0a8
 +    },
 +}
 diff --git a/android/aidl-impl/Android.bp b/android/aidl-impl/Android.bp
-index 8c545335270b865013dec862dc0d58754295028c..b0d20294e9e3e795b7d56902e1c9bde3c21b91d4 100644
+index 8c54533..b0d2029 100644
 --- a/android/aidl-impl/Android.bp
 +++ b/android/aidl-impl/Android.bp
 @@ -1,4 +1,5 @@

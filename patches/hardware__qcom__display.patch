@@ -1,41 +1,5 @@
-diff --git a/composer/Android.bp b/composer/Android.bp
-index 4dfa42d3adce182e82777b09fb4f8e1dc9076a55..7391bfe037c2de7bed8d014f132a64252fb6c59d 100644
---- a/composer/Android.bp
-+++ b/composer/Android.bp
-@@ -1,9 +1,30 @@
-+// Stock-stack selection preserves the existing install behavior per device.
-+soong_config_module_type {
-+    name: "sm8550_composer_install_defaults_type",
-+    module_type: "cc_defaults",
-+    config_namespace: "sheng_display",
-+    bool_variables: ["stock_stack"],
-+    properties: ["installable"],
-+}
-+
-+sm8550_composer_install_defaults_type {
-+    name: "sm8550_composer_install_defaults",
-+    soong_config_variables: {
-+        stock_stack: {
-+            installable: true,
-+            conditions_default: {
-+                installable: false,
-+            },
-+        },
-+    },
-+}
-+
- composer_srcs = ["*.cpp"]
- 
- cc_binary {
- 
-     name: "vendor.qti.hardware.display.composer-service",
--    defaults: ["qtidisplay_defaults"],
-+    defaults: ["qtidisplay_defaults", "sm8550_composer_install_defaults"],
-     sanitize: {
-         integer_overflow: true,
-     },
 diff --git a/config/display-product.mk b/config/display-product.mk
-index 04b5f1996c5510df0ab37058152f470c0859d935..705413475ab5b4a770712a1575423c6139e9f32f 100644
+index 04b5f19..7054134 100644
 --- a/config/display-product.mk
 +++ b/config/display-product.mk
 @@ -50,7 +50,7 @@ PRODUCT_COPY_FILES += hardware/qcom/display/config/smomo_setting.xml:$(TARGET_CO
@@ -102,7 +66,7 @@ index 04b5f1996c5510df0ab37058152f470c0859d935..705413475ab5b4a770712a1575423c61
  
  ifeq ($(TARGET_USES_QMAA),true)
 diff --git a/gralloc/gr_allocator.cpp b/gralloc/gr_allocator.cpp
-index b9c34912dd8184c4eba2a488a50ec82cfdfcfb96..c3ff06e3df7de9c76d76c5e84fff62cfb2434cb2 100644
+index b9c3491..c3ff06e 100644
 --- a/gralloc/gr_allocator.cpp
 +++ b/gralloc/gr_allocator.cpp
 @@ -34,9 +34,6 @@
@@ -116,7 +80,7 @@ index b9c34912dd8184c4eba2a488a50ec82cfdfcfb96..c3ff06e3df7de9c76d76c5e84fff62cf
  #include "gr_utils.h"
  #include <QtiGralloc.h>
 diff --git a/init/init.qti.display_boot.sh b/init/init.qti.display_boot.sh
-index e29ba42fd6687bd8c5d1d0bace9d901ff6840e60..8d31a9e95a1a98a980cc143c22a39cf480416824 100644
+index e29ba42..8d31a9e 100644
 --- a/init/init.qti.display_boot.sh
 +++ b/init/init.qti.display_boot.sh
 @@ -88,7 +88,7 @@ case "$target" in
@@ -138,7 +102,7 @@ index e29ba42fd6687bd8c5d1d0bace9d901ff6840e60..8d31a9e95a1a98a980cc143c22a39cf4
          ;;
      esac
 diff --git a/qmaa/Android.bp b/qmaa/Android.bp
-index 96b5023f73e2993729f09689f7ac66fe503daf31..687976e71500e05812d3b54e91d630fe9406593d 100644
+index 96b5023..687976e 100644
 --- a/qmaa/Android.bp
 +++ b/qmaa/Android.bp
 @@ -1,14 +1,11 @@

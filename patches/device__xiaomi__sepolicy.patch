@@ -1,5 +1,5 @@
 diff --git a/vendor/hal_citsensorservice_xiaomi.te b/vendor/hal_citsensorservice_xiaomi.te
-index bda53467ea3ca80ab28cc240b37d30764e653f74..9108bb37754005178f60ffc897b24b83baf233e8 100644
+index bda5346..9108bb3 100644
 --- a/vendor/hal_citsensorservice_xiaomi.te
 +++ b/vendor/hal_citsensorservice_xiaomi.te
 @@ -26,8 +26,8 @@ allow vendor_hal_citsensorservice_xiaomi_default vendor_sysfs_displayfeature:fil
@@ -14,7 +14,7 @@ index bda53467ea3ca80ab28cc240b37d30764e653f74..9108bb37754005178f60ffc897b24b83
  allow vendor_hal_citsensorservice_xiaomi_default hal_graphics_composer:fd *;
  allow vendor_hal_citsensorservice_xiaomi_default vendor_qdisplay_service:service_manager find;
 diff --git a/vendor/hal_display_config.te b/vendor/hal_display_config.te
-index 1c79364a984d69cb8ca8bd86699bf8ebcc98e0cf..5a7363794c1f34eed0f45b3b07344b48c2bb4aca 100644
+index 1c79364..5a73637 100644
 --- a/vendor/hal_display_config.te
 +++ b/vendor/hal_display_config.te
 @@ -1,2 +1,2 @@
@@ -23,7 +23,7 @@ index 1c79364a984d69cb8ca8bd86699bf8ebcc98e0cf..5a7363794c1f34eed0f45b3b07344b48
 +allow hal_graphics_composer_server vendor_hal_displayfeature_xiaomi_default:binder transfer;
 +allow hal_graphics_composer_server vendor_hal_citsensorservice_xiaomi_default:binder transfer;
 diff --git a/vendor/hal_displayfeature_xiaomi.te b/vendor/hal_displayfeature_xiaomi.te
-index c492bd7454022e30e5dfc4630e9b82a6b8213df2..ff22bbe75b582c6bf47c38d188d4e22503e109ff 100644
+index c492bd7..ff22bbe 100644
 --- a/vendor/hal_displayfeature_xiaomi.te
 +++ b/vendor/hal_displayfeature_xiaomi.te
 @@ -9,8 +9,8 @@ allow vendor_hal_displayfeature_xiaomi_default sensors_device:chr_file r_file_pe
@@ -38,7 +38,7 @@ index c492bd7454022e30e5dfc4630e9b82a6b8213df2..ff22bbe75b582c6bf47c38d188d4e225
  allow vendor_hal_displayfeature_xiaomi_default vendor_display_vendor_data_file:file create_file_perms;
  allow vendor_hal_displayfeature_xiaomi_default vendor_displayfeature_device:chr_file { ioctl open read write };
 diff --git a/vendor/property_contexts b/vendor/property_contexts
-index cbd4e0f02c526346bfefd368f24b4517fb0c1a3d..9ecab62192cb657dc82c7dcb2aab0cc4da456c7a 100644
+index cbd4e0f..9ecab62 100644
 --- a/vendor/property_contexts
 +++ b/vendor/property_contexts
 @@ -95,7 +95,7 @@ ro.vendor.video.style.by.layer.support          u:object_r:vendor_displayfeature
@@ -61,7 +61,7 @@ index cbd4e0f02c526346bfefd368f24b4517fb0c1a3d..9ecab62192cb657dc82c7dcb2aab0cc4
 +persist.vendor.sys.provision.status u:object_r:vendor_payment_security_prop:s0 exact string
 +persist.vendor.sys.attestation.status u:object_r:vendor_payment_security_prop:s0 exact string
 diff --git a/vendor/radio.te b/vendor/radio.te
-index ea401490374ba5704e56b4b8f598a6c0d6d30d9c..e92d29319d0514a2bc714dc8c2530d554afd8142 100644
+index ea40149..e92d293 100644
 --- a/vendor/radio.te
 +++ b/vendor/radio.te
 @@ -1,6 +1,5 @@

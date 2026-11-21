@@ -1,5 +1,5 @@
 diff --git a/bootstrap/bootstrap.go b/bootstrap/bootstrap.go
-index 40058692fd5872985ba38587eb15fd188a2504b7..a983b512939aeb604c7c99d89b062183467a32da 100644
+index 4005869..a983b51 100644
 --- a/bootstrap/bootstrap.go
 +++ b/bootstrap/bootstrap.go
 @@ -19,6 +19,7 @@ import (

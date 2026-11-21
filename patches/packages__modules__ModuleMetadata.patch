@@ -1,5 +1,5 @@
 diff --git a/res/values/strings.xml b/res/values/strings.xml
-index 2bb349bfe659b63ba09e83d697ba37d646f2944a..41dc4c85539e7c4031dff99fa7e435d2a2f248c4 100644
+index 2bb349b..41dc4c8 100644
 --- a/res/values/strings.xml
 +++ b/res/values/strings.xml
 @@ -2,5 +2,6 @@
@@ -11,7 +11,7 @@ index 2bb349bfe659b63ba09e83d697ba37d646f2944a..41dc4c85539e7c4031dff99fa7e435d2
 +  <string name="wifi_module_name">Wi-Fi</string>
  </resources>
 diff --git a/res/xml/module_metadata.xml b/res/xml/module_metadata.xml
-index e066161bcc2364051c6a921475c4b076e2544615..84e515aafc0c81c1ac40aec3986045d58d335b9f 100644
+index e066161..84e515a 100644
 --- a/res/xml/module_metadata.xml
 +++ b/res/xml/module_metadata.xml
 @@ -1,2 +1,3 @@
