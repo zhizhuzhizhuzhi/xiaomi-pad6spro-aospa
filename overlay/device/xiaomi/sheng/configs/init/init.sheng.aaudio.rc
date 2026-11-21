@@ -1,3 +1,0 @@
-# Configure the downstream audio path after partition property loading.
-on post-fs-data
-    setprop aaudio.mmap_policy 2

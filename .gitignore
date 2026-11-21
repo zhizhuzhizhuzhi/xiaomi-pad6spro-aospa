@@ -1,8 +1,0 @@
-__pycache__/
-*.pyc
-out*/
-*.part
-*.img
-*.zip
-*.pk8
-*.pem
